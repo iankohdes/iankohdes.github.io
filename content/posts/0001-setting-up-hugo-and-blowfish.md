@@ -2,19 +2,18 @@
 title: "Setting up Hugo and Blowfish"
 date: 2025-05-30
 draft: false
-tags: ["hugo", "blowfish"]
+tags: ["hugo", "blowfish", "github-actions"]
 ---
 
 This first post covers how to set up this blog. It is built with the Hugo static site generator and uses the [Blowfish theme](https://blowfish.page/). As this website’s source code is stored on GitHub, check out the [Hugo documentation](https://gohugo.io/host-and-deploy/host-on-github-pages/) for details on how to host the site on GitHub Pages. (GitHub’s default static site generator is Jekyll, so extra steps are required.)
 
-I tried to customise the typefaces to use IBM Plex Sans and JetBrains Mono, but could never get the CSS to work so I gave up. This website uses the default settings and themes. _I hate CSS._
+I tried to customise the typefaces to use IBM Plex Sans and JetBrains Mono, my go-to typefaces when using [Obsidian](https://obsidian.md/), but could never get the CSS to work so I gave up. This website uses the default settings and themes. _I hate CSS._
 
-```rust
-fn main() {
-	let greeting: &str = "Hello, world!";
-	println!("{greeting}");
-}
-```
+## Initial impressions
+
+I found setting up a Hugo static site on GitHub Pages to be a fair bit more involved than doing the same on GitLab Pages. When I set up my first static site on GitLab, the process also took some time, but I don’t remember having to jump through this many hoops. One restriction that GitHub imposes, which GitLab doesn’t, is that to use GitHub Actions one’s repo must be _public_. With GitLab Pages one could set up a static site but keep the repo private.
+
+The trade-off is that one gets 2,000 CI/CD minutes per month on GitHub, as opposed to GitLab’s 500. (GitLab, for its part, offers 10 GB of storage to GitHub’s 2.) This applies to the free tiers of both services, to be clear.
 
 ## Hugo and Blowfish theme installation
 
@@ -62,7 +61,30 @@ Please choose one of the options below, start typing to search.
 
 Go through the options and change whatever is desired. Hit the Escape key to escape the interactive menu.
 
-## Going back into the interactive menu
+## Folder movements (this gets a little confusing)
+
+Right, so far the folder structure of our Git looks something like this:
+
+```bash
+.
+├── newSite
+└── README.md
+```
+
+The `newSite` folder was created by Blowfish and contains all the assets required to launch a Hugo static site.
+
+There are two things to take note of.
+
+1. `newSite/` contains a `.git/` folder, and its parent (our Git repo) also contains a `.git/` folder. The one in `newSite/` must be removed.
+2. We need to move _everything_ in `newSite/` up one level, into that of the Git repo. This is because, later on, we will create a `.github/workflows/hugo.yaml` file, which will be evaluated in conjunction with the `config/` folder (which, when Blowfish initialised the website, was in the `newSite/` folder).
+
+A bit confusing, yes? Yes, it is.
+
+{{< alert "fire" >}}
+Don’t forget to move all the **dotfiles** in `newSite/` up one level, too!
+{{< /alert >}}
+
+## Returning to the interactive menu
 
 Use the same command to re-enter the interactive menu:
 
@@ -70,7 +92,7 @@ Use the same command to re-enter the interactive menu:
 npx blowfish-tools
 ```
 
-There is an important caveat here: **be at the level of the website directory when running this command.** If you are at any other level, the Blowfish installer will think that you are trying to create a brand new website and you’ll see the same message as that shown above.
+There is an important caveat here: **be at the top level when running this command.** If you are at any other level, the Blowfish installer will think that you are trying to create a brand new website and you’ll see the same message as that shown above.
 
 You know you’re at the correct level when you see this:
 
@@ -99,7 +121,61 @@ Update Blowfish installation
 Exit
 ```
 
-This is the interactive menu that is navigated through using the arrow keys.
+This is the interactive menu that is navigated through using the arrow keys. Do all the customisations that need doing before moving on to the next step, which is preparing the repo for deployment to GitHub Pages.
+
+## Starting a local server
+
+In the terminal, run `hugo server` and go to `http://localhost:1313` in any internet browser. Anytime changes are saved, they are immediately visible in the local version of the website.
+
+## Pre-deployment and deployment
+
+Follow the steps listed [here](https://gohugo.io/host-and-deploy/host-on-github-pages/). Steps 1 to 4 are straightforward.
+
+Step 5 involves specifying the following in a `hugo.toml` file:
+
+```
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
+```
+
+Important question: where is the file located? If you look through your Hugo folder structure, you’d see that there are _two_ `hugo.toml` files: one at the top level, and one inside the `config/_default/` folder. We will add the above lines to the `hugo.toml` in the `config/_default/` folder.
+
+With steps 6 and 7 we have two options. We could either make the relevant changes in the terminal, or we could use GitHub’s GUI to do this for us. In both cases the action is the same. First, we create a `.github/workflows/` folder _at the same level as_ the `config/` folder. Then, we add an empty `hugo.yaml` file into the `.github/workflows/` folder. Third, we paste the [following content](https://gohugo.io/host-and-deploy/host-on-github-pages/#step-7) into the empty YAML file.
+
+Doing this in the terminal is simple. Once we are done we need to push our changes, and the CI/CD pipeline will take over deploying our website into production.
+
+If we wish to take the GitHub GUI option, we first need to push our changes up to step 5. For steps 6 and 7, click on the Actions tab in the top ribbon. Click on the button that says ‘New workflow’ and search for the Hugo workflow. Select that and, once the page loads, there will be the step to create the `.github/workflows/hugo.yaml` file. This file is already pre-filled but you can replace its contents with that from the [Hugo documentation](https://gohugo.io/host-and-deploy/host-on-github-pages/#step-7). Commit the changes for the CI/CD process to start.
+
+The CI pipeline has two nodes: `build` and `deploy`. Once both are successfully completed, the website will be live.
+
+## Debugging: ‘Your push would publish a private email address.’
+
+When pushing to Git, there might be an error that looks like this:
+
+```bash
+remote: error: GH007: Your push would publish a private email address.
+```
+
+This never happened to me in GitLab because I could keep my repo private. But this is GitHub, and in order to mitigate the issue one can consule [this Stack Overflow thread](https://stackoverflow.com/questions/43863522/error-your-push-would-publish-a-private-email-address). Simply put, set the global user e-mail to GitHub’s anonymised no-reply e-mail address. (This address can be obtained [here](https://github.com/settings/emails).)
+
+```bash
+git config --global user.email "{ID}+{username}@users.noreply.github.com"
+```
+
+This sets the e-mail address for all repositories. To set the e-mail addres for only one:
+
+```bash
+git config user.email "{ID}+{username}@users.noreply.github.com"
+```
+
+Next, reset the author information for the last commit:
+
+```bash
+git commit --amend --reset-author --no-edit
+```
+
+Finally, try pushing again. `git push` should work this time.
 
 ## Alert boxes (or callouts)
 
