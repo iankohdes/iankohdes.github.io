@@ -4,7 +4,7 @@ date: 1970-01-01
 draft: false
 ---
 
-_Welcome._ This is a website for my programming projects, learnings and documentation.
+_Welcome._ This is a website to document my programming-related endeavours.
 
 I’ve got Rust/Kotlin/Python to learn and use, projects to work on, the `polars` dataframe library to learn, potentially some data to visualise, and some natural language to process. And types! Lots and lots of sum and product types to create (hopefully) – I’m really looking forward to that. 😃
 
