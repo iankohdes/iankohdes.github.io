@@ -1,1 +1,1 @@
-# iankohdes.github.io
+This is the repository for [my technical blog/website](https://iankohdes.github.io/).

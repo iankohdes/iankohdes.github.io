@@ -8,7 +8,7 @@
 {{ end }}
 
 
-<div
+<div style="font-size:0.9rem;line-height:1.5em;"
   {{ if not ($.Scratch.Get "cardColor") }}
     class="flex px-4 py-3 rounded-md bg-primary-100 dark:bg-primary-900"
   {{ else }}
@@ -33,7 +33,7 @@
     {{ else }}
       style="color: {{ $.Scratch.Get "textColor" }}"
     {{ end }}>
-    
+
     {{- .Inner | markdownify -}}
   </span>
 </div>

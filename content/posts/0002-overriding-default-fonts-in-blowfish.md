@@ -5,9 +5,11 @@ draft: false
 tags: ["hugo", "blowfish", "css"]
 ---
 
-_This follows from my [entry on setting up Hugo with the Blowfish theme](https://iankohdes.github.io/posts/0001-setting-up-hugo-and-blowfish/)._
+{{<lead>}}
+This follows from my [entry on setting up Hugo with the Blowfish theme](https://iankohdes.github.io/posts/0001-setting-up-hugo-and-blowfish/). I didn’t like that system-default sans-serif typefaces were used to render the site, and shuddered at the thought of Windows users seeing this site’s text in _Arial_. Changing the defaults was the natural result and, as one shall soon observe, quite the mini-adventure.
+{{</lead>}}
 
-When overriding the default fonts, my experience was that the [official Blowfish documentation](https://blowfish.page/docs/advanced-customisation/#using-additional-fonts) was somewhat incomplete, and I needed Gemini 2.5 to help me debug my way to success. This entry covers the following points:
+While attempting to override the default fonts, my experience was that the [official Blowfish documentation](https://blowfish.page/docs/advanced-customisation/#using-additional-fonts) was somewhat incomplete, and I needed Gemini 2.5 to help me debug my way to success. This entry covers the following points:
 
 - Usage of `.woff2` font files instead of `.ttf`
 - Adding variable-width fonts to the `custom.css` file
@@ -69,11 +71,22 @@ The `src` field has two values: `url` and `format`. For the URL, take note of th
 
 (Explanation also from Gemini.) Moving on, the `format(woff2-variations)` hint is needed to let the browser know that `IBMPlexSans-VariableFont_wdth,wght.woff2` is a variable font, which then helps with optimising rendering.
 
-Now we are finally able to specify just _how_ we wish to override the default fonts. We do so using the `body`, `em` and `strong` elements, the latter two representing italicised and bold text respectively. Note that, for the `body`, the `font-style` should only be `normal` and not `normal italic` (as a way of being lazy). The normal font style sets the default for the body text, while `em` sets the style for italicised, or emphasised, text. The same logic holds for `strong`.
+Now we are finally able to specify just _how_ we wish to override the default fonts. We do so using the `body`, `em` and `strong` elements, the latter two representing italicised and bold text respectively. Note that, for the `body`, the `font-style` should only be `normal` and _not_ `normal italic` (as a way of being lazy).
+
+```css
+/* Negative example */
+body {
+    font-family: "IBM Plex Sans Variable", sans-serif;
+    font-weight: 400;
+    font-style: normal italic; /* <-- Don’t do this! */
+}
+```
+
+The normal font style sets the default for the body text, while `em` sets the style for italicised, or emphasised, text. The same logic holds for `strong`.
 
 ## Adding static fonts
 
-The process is generally similar compared to variable-width fonts: first we specify `@font-face` so that Hugo (or the browser) knows where to find the font resources, and then we add the overriding syntax. I used the static JetBrains Mono for my website and will explain why at the end of this section.
+The process is generally similar compared to variable-width fonts: first we specify `@font-face` so that Hugo (or the browser) knows where to find the font resources, and then we add the overriding syntax. I used the static JetBrains Mono for my website and explain my decision at the end of this section.
 
 ```css
 @font-face {
@@ -191,6 +204,8 @@ First, I’ll mention what I did to get my fonts recognised by the browser. I op
 
 {{< alert "circle-info" >}}
 It is generally not a good idea to modify files inside the `./themes/blowfish/` directory. By adding customisations to CSS and HTML files defined outside said directory, we maintain a separation of form and changes to the defaults. At least this is the advice I read in Hugo-related forums.
+
+But… I’ve gone against this advice by adjusting the `font-size` and `line-height` of text in the `alerts.html` file. 😬
 {{</alert>}}
 
 Next, identify where the CSS-related elements are. For Blowfish’s `head.html`, this is a snippet of what the CSS-related portion of the file looks like:
@@ -239,6 +254,6 @@ If all you wanted was to know how to override the font defaults, then feel free 
 
 It’s a bit crazy that this entry about such a small issue is _so much longer_ than the [entry](https://iankohdes.github.io/posts/0001-setting-up-hugo-and-blowfish/) about setting up a themed Hugo site on GitHub Pages. Clearly I am a front-end noob. Front-end development has never been my thing, and with this recent experience, it will likely never be an interest I want to cultivate.
 
-But that said, I quite like how my site looks now. 😊✌🏼
+But that said, I quite like how my site looks now. 😊✌🏼 Would I prefer to have built it using WordPress, Medium, Substack or Squarespace? Nah.
 
 _Now to tackle the issue of overriding the default favicon…_

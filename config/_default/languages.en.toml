@@ -8,7 +8,7 @@ title = "Ian Writes Some Code"
 displayName = "EN"
 isoCode = "en"
 rtl = false
-dateFormat = "2 January 2006"
+dateFormat = "02 January 2006"
 
 ["params.author"]
 name = "Ian Koh"
