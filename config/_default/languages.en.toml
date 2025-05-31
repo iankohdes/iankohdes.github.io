@@ -2,7 +2,7 @@ disabled = false
 languageCode = "en"
 languageName = "English"
 weight = 1
-title = "Ian Koh"
+title = "Ian Writes Some Code"
 
 [params]
 displayName = "EN"
@@ -12,4 +12,4 @@ dateFormat = "2 January 2006"
 
 ["params.author"]
 name = "Ian Koh"
-headline = "Always learning"
+headline = "I hate CSS"
