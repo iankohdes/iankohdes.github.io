@@ -5,6 +5,10 @@ draft: false
 tags: ["hugo", "blowfish", "github-actions"]
 ---
 
+{{< lead >}}
+Install Hugo and Blowfish, and learn how to deploy the website on GitHub Pages. Also learn some cool features for blog entries.
+{{< /lead >}}
+
 This first post covers how to set up this blog. It is built with the Hugo static site generator and uses the [Blowfish theme](https://blowfish.page/). As this website’s source code is stored on GitHub, check out the [Hugo documentation](https://gohugo.io/host-and-deploy/host-on-github-pages/) for details on how to host the site on GitHub Pages. (GitHub’s default static site generator is Jekyll, so extra steps are required.)
 
 I tried to customise the typefaces to use IBM Plex Sans and JetBrains Mono, my go-to typefaces when using [Obsidian](https://obsidian.md/), but could never get the CSS to work so I gave up. This website uses the default settings and themes. _I hate CSS._
@@ -177,6 +181,10 @@ git commit --amend --reset-author --no-edit
 
 Finally, try pushing again. `git push` should work this time.
 
+{{< alert "circle-info" >}}
+The rest of this entry describes the features of the Blowfish theme.
+{{< /alert >}}
+
 ## Alert boxes (or callouts)
 
 Unfortunately, this theme doesn’t implement callouts in the way that Obsidian does. It’s a bit more backwards and more inconvenient to write.
@@ -187,10 +195,24 @@ This is how you create an _alert_ box. You can insert any icon listed [on this p
 
 And this is what it looks like in code:
 
-```raw
+```text
 {{</* alert "circle-info" */>}}
 This is how you create an _alert_ box. You can insert any icon listed [on this page](https://blowfish.page/samples/icons/) for added effect.
 {{</* /alert */>}}
+```
+
+## Adding a lead paragraph
+
+{{<lead>}}
+This is what a lead paragraph looks like. Use this at the beginning of a post to summarise its main idea.
+{{</lead>}}
+
+Followed by regular text. In code the syntax is:
+
+```text
+{{</* lead */>}}
+This is what a lead paragraph looks like. Use this at the beginning of a post to summarise its main idea.
+{{</* /lead */>}}
 ```
 
 ## Shortcodes
