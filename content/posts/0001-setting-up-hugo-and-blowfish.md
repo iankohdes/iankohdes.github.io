@@ -181,10 +181,6 @@ git commit --amend --reset-author --no-edit
 
 Finally, try pushing again. `git push` should work this time.
 
-{{< alert "circle-info" >}}
-The rest of this entry describes the features of the Blowfish theme.
-{{< /alert >}}
-
 ## Alert boxes (or callouts)
 
 Unfortunately, this theme doesn’t implement callouts in the way that Obsidian does. It’s a bit more backwards and more inconvenient to write.
