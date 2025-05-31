@@ -27,7 +27,7 @@ The next steps are to install the required tools. I use [Homebrew](https://brew.
 Find the Blowfish documentation for installation [here](https://blowfish.page/docs/installation/). I use the CLI-based `blowfish-tools` to install the theme.
 
 ```bash
-> npx blowfish-tools
+npx blowfish-tools
 ```
 
 This shows a splash screen and the following interactive menu:
@@ -71,7 +71,7 @@ Right, so far the folder structure of our Git looks something like this:
 └── README.md
 ```
 
-The `newSite` folder was created by Blowfish and contains all the assets required to launch a Hugo static site.
+The `newSite/` folder was created by Blowfish and contains all the assets required to launch a Hugo static site.
 
 There are two things to take note of.
 
@@ -157,7 +157,7 @@ When pushing to Git, there might be an error that looks like this:
 remote: error: GH007: Your push would publish a private email address.
 ```
 
-This never happened to me in GitLab because I could keep my repo private. But this is GitHub, and in order to mitigate the issue one can consule [this Stack Overflow thread](https://stackoverflow.com/questions/43863522/error-your-push-would-publish-a-private-email-address). Simply put, set the global user e-mail to GitHub’s anonymised no-reply e-mail address. (This address can be obtained [here](https://github.com/settings/emails).)
+This never happened to me in GitLab because I could keep my repo private. But this is GitHub, and in order to mitigate the issue one can consult [this Stack Overflow thread](https://stackoverflow.com/questions/43863522/error-your-push-would-publish-a-private-email-address). Simply put, set the global user e-mail to GitHub’s anonymised no-reply e-mail address. (This address can be obtained [here](https://github.com/settings/emails).)
 
 ```bash
 git config --global user.email "{ID}+{username}@users.noreply.github.com"
