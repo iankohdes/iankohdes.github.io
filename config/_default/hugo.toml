@@ -8,6 +8,9 @@ enableEmoji = true
 # googleAnalytics = ""
 baseURL = "https://iankohdes.github.io"
 
+[params]
+  customCSS = ["css/custom.css"]
+
 [pagination]
 pagerSize = 100
 

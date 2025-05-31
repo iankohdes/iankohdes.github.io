@@ -11,8 +11,6 @@ Install Hugo and Blowfish, and learn how to deploy the website on GitHub Pages. 
 
 This first post covers how to set up this blog. It is built with the Hugo static site generator and uses the [Blowfish theme](https://blowfish.page/). As this website’s source code is stored on GitHub, check out the [Hugo documentation](https://gohugo.io/host-and-deploy/host-on-github-pages/) for details on how to host the site on GitHub Pages. (GitHub’s default static site generator is Jekyll, so extra steps are required.)
 
-I tried to customise the typefaces to use IBM Plex Sans and JetBrains Mono, my go-to typefaces when using [Obsidian](https://obsidian.md/), but could never get the CSS to work so I gave up. This website uses the default settings and themes. _I hate CSS._
-
 ## Initial impressions
 
 I found setting up a Hugo static site on GitHub Pages to be a fair bit more involved than doing the same on GitLab Pages. When I set up my first static site on GitLab, the process also took some time, but I don’t remember having to jump through this many hoops. One restriction that GitHub imposes, which GitLab doesn’t, is that to use GitHub Actions one’s repo must be _public_. With GitLab Pages one could set up a static site but keep the repo private.
@@ -130,6 +128,10 @@ This is the interactive menu that is navigated through using the arrow keys. Do 
 ## Starting a local server
 
 In the terminal, run `hugo server` and go to `http://localhost:1313` in any internet browser. Anytime changes are saved, they are immediately visible in the local version of the website.
+
+## Overriding the default fonts
+
+This took the longest amount of time to figure out and renewed my hatred of CSS. Since I found it an involved process (for someone with barely any experience with CSS), I’ve decided to make this [its own entry](https://iankohdes.github.io/posts/0002-overriding-default-fonts-in-blowfish/).
 
 ## Pre-deployment and deployment
 
