@@ -5,7 +5,7 @@ summaryLength = 0
 buildDrafts = false
 buildFuture = false
 enableEmoji = true
-googleAnalytics = ""
+# googleAnalytics = ""
 baseURL = "https://iankohdes.github.io"
 
 [pagination]
