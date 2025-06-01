@@ -8,8 +8,8 @@ enableEmoji = true
 # googleAnalytics = ""
 baseURL = "https://iankohdes.github.io"
 
-[params]
-  customCSS = ["css/custom.css"]
+# [params]
+#   customCSS = ["css/custom.css"] # This is an alternative to referencing the CSS in ./layouts/partials/head.html
 
 [pagination]
 pagerSize = 100

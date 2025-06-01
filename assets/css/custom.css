@@ -50,6 +50,10 @@ body {
     font-style: normal;
 }
 
+p {
+    line-height: 1.6rem;
+}
+
 em {
     font-style: italic;
 }
@@ -60,4 +64,5 @@ strong {
 
 code {
     font-family: "JetBrains Mono";
+    padding: 1.5px 1.5px;
 }

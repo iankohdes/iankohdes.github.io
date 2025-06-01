@@ -51,6 +51,7 @@
     integrity="{{ $bundleCSS.Data.Integrity }}" />
 
   <!-- THIS IS MY ADDITION -->
+  <!-- It is an alternative to specifying a customCSS in ./config/_default/hugo.toml -->
   {{ $style := resources.Get "css/custom.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}">
   <!-- END OF MY ADDITION -->

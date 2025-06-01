@@ -192,20 +192,29 @@ var i {
 
 And thus, I went with the static JetBrains Mono fonts. If you’re reading this and want to customise your coding font with a variable-width one, go right ahead and try that syntax (I’ve not tested it for correctness).
 
+## Custom fonts added but not recognised
+
+After adding my custom CSS, I noticed that the site used the fall-back sans-serif typeface. This meant that my custom fonts weren’t loaded. I explored two options that I describe below, either of which should do the trick. (I ended up doing both but using one or the other is likely going to be fine.)
+
 ## Adding a custom CSS parameter
 
-`TEXT TO FOLLOW`
+This is a simpler and neater alternative to making adjustments to `head.html` (covered in the next section). Go into `./config/_default/hugo.toml` and add this:
 
-## `head.html`
+```css
+[params]
+  customCSS = ["css/custom.css"]
+```
 
-This is the part that the [official Blowfish documentation](https://blowfish.page/docs/advanced-customisation/#using-additional-fonts) didn’t quite cover.
+If this works, then great! If not then move to the next section.
 
-First, I’ll mention what I did to get my fonts recognised by the browser. I opened the `./themes/blowfish/layouts/partials/head.html` and copied all of its contents. Then I pasted them in a `./layouts/partials/head.html` file that I created.
+## Making changes to `head.html`
+
+Here, we directly add our custom CSS _after_ the theme’s CSS. It’s a more robust approach that should do the trick.
+
+Open the `./themes/blowfish/layouts/partials/head.html` and copied all of its contents. Then paste them in a `./layouts/partials/head.html` file that I created.
 
 {{< alert "circle-info" >}}
 It is generally not a good idea to modify files inside the `./themes/blowfish/` directory. By adding customisations to CSS and HTML files defined outside said directory, we maintain a separation of form and changes to the defaults. At least this is the advice I read in Hugo-related forums.
-
-But… I’ve gone against this advice by adjusting the `font-size` and `line-height` of text in the `alerts.html` file. 😬
 {{</alert>}}
 
 Next, identify where the CSS-related elements are. For Blowfish’s `head.html`, this is a snippet of what the CSS-related portion of the file looks like:
@@ -229,7 +238,7 @@ Next, identify where the CSS-related elements are. For Blowfish’s `head.html`,
     integrity="{{ $bundleCSS.Data.Integrity }}" />
 ```
 
-Thank God that they were all bundled in the same place!
+Thank God they’re all bundled in the same place!
 
 Now we add the following syntax _after_ the above CSS-related lines:
 
@@ -238,22 +247,16 @@ Now we add the following syntax _after_ the above CSS-related lines:
   <link rel="stylesheet" href="{{ $style.RelPermalink }}">
 ```
 
-This ensures that the customisations we make are applied _after_ the default CSS options have been applied. Failing to add this line might result in a site whose structure is completely destroyed. (You’ll know you’ve cocked up when you see it.)
-
-Right, so with this change, the `custom.css` file (with the correct paths specified) and setting the custom CSS parameter in my `hugo.toml` file, I was able to change the site’s default typefaces to IBM Plex Sans and JetBrains Mono. But, there was a moment in time when I hadn’t added the `head.html` file, and the following paragraphs describe my debugging efforts with the help of Gemini 2.5.
+With this change, the `custom.css` file (with the correct paths specified) and setting the custom CSS parameter in my `hugo.toml` file, I was able to change the site’s default typefaces to IBM Plex Sans and JetBrains Mono. Hopefully this thorough guide has helped and you’re now able to prettify your Blowfish-themed site.
 
 {{< alert "comment" >}}
 I have to say: Gemini was surprisingly helpful _and_ accurate throughout this entire exercise. Considering that Hugo themes can be somewhat variable in how they’re set up, the LLM saved me a lot of time with its responses and got my site to the state I wanted it to be without much hassle. Or maybe I just wrote really good prompts – who knows.
 {{</alert>}}
 
-If all you wanted was to know how to override the font defaults, then feel free to stop reading at this point. Hopefully you’ve found this thorough entry helpful and you’re able to prettify your Blowfish-themed site.
-
-### Debugging `head.html` (or the lack thereof)
-
 ## Concluding remarks
 
-It’s a bit crazy that this entry about such a small issue is _so much longer_ than the [entry](https://iankohdes.github.io/posts/0001-setting-up-hugo-and-blowfish/) about setting up a themed Hugo site on GitHub Pages. Clearly I am a front-end noob. Front-end development has never been my thing, and with this recent experience, it will likely never be an interest I want to cultivate.
+It’s a bit crazy that this entry about such a small issue is _longer_ than the [entry](https://iankohdes.github.io/posts/0001-setting-up-hugo-and-blowfish/) about setting up a themed Hugo site on GitHub Pages. Clearly I am a CSS noob. Front-end development has never been my thing and, with this recent experience, it will likely never be an interest I want to cultivate.
 
-But that said, I quite like how my site looks now. 😊✌🏼 Would I prefer to have built it using WordPress, Medium, Substack or Squarespace? Nah.
+But with that said, I quite like how my site looks now. 😊✌🏼 Would I prefer to have built it using WordPress, Medium, Substack or Squarespace? Nah.
 
 _Now to tackle the issue of overriding the default favicon…_
