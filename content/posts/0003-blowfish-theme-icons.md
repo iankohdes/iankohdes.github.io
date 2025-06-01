@@ -5,7 +5,7 @@ draft: false
 tags: ["hugo", "blowfish", "icons"]
 ---
 
-The Blowfish theme has a [list of icons](https://blowfish.page/samples/icons/) that can be used as shortcodes. They are a mix of company names and various symbols.
+The Blowfish theme has a [list of icons](https://blowfish.page/samples/icons/) that can be used as shortcodes. They are a mix of company names and various symbols. For my future convenience I organise them based on whether they are symbols or company icons, mainly because I intend to use the former often but not the latter.
 
 The syntax for an icon is `{{</* icon "<value>" */>}}`. To use it in an `alert` shortcode, simply mention the icon value in double quotes (no need for the word `icon`).
 
