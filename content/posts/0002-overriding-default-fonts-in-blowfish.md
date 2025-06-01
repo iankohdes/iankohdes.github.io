@@ -6,10 +6,12 @@ tags: ["hugo", "blowfish", "css"]
 ---
 
 {{<lead>}}
-This follows from my [entry on setting up Hugo with the Blowfish theme](https://iankohdes.github.io/posts/0001-setting-up-hugo-and-blowfish/). I didn’t like that system-default sans-serif typefaces were used to render the site, and shuddered at the thought of Windows users seeing this site’s text in _Arial_. Changing the defaults was the natural result and, as one shall soon observe, quite the mini-adventure.
+This follows from my [entry on setting up Hugo with the Blowfish theme](https://iankohdes.github.io/posts/0001-setting-up-hugo-and-blowfish/). I didn’t like that system-default sans-serif typefaces were used to render the site, and shuddered at the thought of Windows users seeing this site’s text in _Arial_.
 {{</lead>}}
 
-While attempting to override the default fonts, my experience was that the [official Blowfish documentation](https://blowfish.page/docs/advanced-customisation/#using-additional-fonts) was somewhat incomplete, and I needed Gemini 2.5 to help me debug my way to success. This entry covers the following points:
+While attempting to override the default fonts, my experience was that the [official Blowfish documentation](https://blowfish.page/docs/advanced-customisation/#using-additional-fonts) was slightly incomplete. My inexperience also led me to create a few issues and I needed Gemini 2.5 to help me debug my way to success.
+
+This entry covers the following points:
 
 - Usage of `.woff2` font files instead of `.ttf`
 - Adding variable-width fonts to the `custom.css` file
@@ -60,8 +62,6 @@ strong {
     font-weight: 700;
 }
 ```
-
-There’s lots to unpack for the CSS noob here.
 
 In the `@font-face` element, notice that we use the same `font-family` value for both the upright and italic font files. This provides a consistent name to reference for the CSS text elements. We distinguish between the upright and italic styles using the `font-style` field. As for `font-weight`, on Google Fonts we see that IBM Plex Sans has a weight ranging from 100 to 700 (with all possible integer values in between, such as 350, 239 and so on). We thus enter `100 700` to represent this range.
 
@@ -194,7 +194,7 @@ And thus, I went with the static JetBrains Mono fonts. If you’re reading this 
 
 ## Custom fonts added but not recognised
 
-After adding my custom CSS, I noticed that the site used the fall-back sans-serif typeface. This meant that my custom fonts weren’t loaded. I explored two options that I describe below, either of which should do the trick. (I ended up doing both but using one or the other is likely going to be fine.)
+After adding my custom CSS, I noticed that the site used the fall-back sans-serif typeface. This meant that my custom fonts weren’t loaded, and unfortunately this was also the part that the [Blowfish documentation](https://blowfish.page/docs/advanced-customisation/#using-additional-fonts) didn’t quite cover. I explored two options that I describe below, either of which should do the trick. (I ended up doing both but using one or the other is likely going to be fine.)
 
 ## Adding a custom CSS parameter
 

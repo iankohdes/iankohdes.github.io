@@ -8,7 +8,7 @@ draft: false
 Welcome.
 {{</lead>}}
 
-This is a website to document my programming-related endeavours. **`test`** `test`
+This is a website to document my programming-related endeavours.
 
 I’ve got Rust/Kotlin/Python to learn and use, projects to work on, the `polars` dataframe library to get acquainted with, potentially some data to visualise, and some natural language to process. And types! Lots and lots of sum and product types to create (hopefully) – I’m looking forward to that. 😃
 
