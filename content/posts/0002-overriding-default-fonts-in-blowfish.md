@@ -211,7 +211,7 @@ If this works, then great! If not then move to the next section.
 
 Here, we directly add our custom CSS _after_ the theme’s CSS. It’s a more robust approach that should do the trick.
 
-Open the `./themes/blowfish/layouts/partials/head.html` and copy all of its contents. Then paste them in a `./layouts/partials/head.html` file that I created.
+Open the `./themes/blowfish/layouts/partials/head.html` and copy all of its contents. Then paste them in a `./layouts/partials/head.html` file (create it if it’s not already there).
 
 {{< alert "circle-info" >}}
 It is generally not a good idea to modify files inside the `./themes/blowfish/` directory. By adding customisations to CSS and HTML files defined outside said directory, we maintain a separation of form and changes to the defaults. At least this is the advice I read in Hugo-related forums.
