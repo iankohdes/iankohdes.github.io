@@ -15,7 +15,7 @@ This first post covers how to set up this blog. It is built with the Hugo static
 
 I found setting up a Hugo static site on GitHub Pages to be a fair bit more involved than doing the same on GitLab Pages. When I set up my first static site on GitLab, the process also took some time, but I don’t remember having to jump through this many hoops. One restriction that GitHub imposes, which GitLab doesn’t, is that to use GitHub Actions one’s repo must be _public_. With GitLab Pages one could set up a static site but keep the repo private.
 
-The trade-off is that one gets 2,000 CI/CD minutes per month on GitHub, as opposed to GitLab’s 500. (GitLab, for its part, offers 10 GB of storage to GitHub’s 2.) This applies to the free tiers of both services, to be clear.
+The trade-off is that one gets 2,000 CI/CD minutes per month on GitHub, as opposed to GitLab’s 500. (GitLab, for its part, offers 10 GB of storage to GitHub’s 500 MB.) This applies to the free tiers of both services, to be clear.
 
 ## Hugo and Blowfish theme installation
 

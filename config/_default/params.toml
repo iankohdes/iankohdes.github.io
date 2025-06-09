@@ -68,7 +68,7 @@ showRelatedContent = false
 [list]
 showHero = false
 layoutBackgroundBlur = true
-layoutBackgroundHeaderSpace = true
+layoutBackgroundHeaderSpace = false
 showBreadcrumbs = false
 showSummary = false
 showViews = false
