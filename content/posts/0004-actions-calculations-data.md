@@ -109,7 +109,7 @@ A --> C;
 B --> C;
 {{</mermaid>}}
 
-## Fetching customers and coupons
+### Fetching customers and coupons
 
 Customer and coupon information count as **data** and live in databases. Fetching them is an **action**. Now, assuming that the databases already have dimensions that indicate which customers are high-value and which coupons are best-value, we can filter on these dimensions and get the records we want.
 
