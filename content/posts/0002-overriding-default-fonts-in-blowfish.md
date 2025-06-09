@@ -3,6 +3,8 @@ title: "Overriding default fonts in the Blowfish theme"
 date: 2025-05-31
 draft: false
 tags: ["hugo", "blowfish", "css"]
+series: ["Setting up a Hugo website with the Blowfish theme"]
+series_order: 2
 ---
 
 {{<lead>}}

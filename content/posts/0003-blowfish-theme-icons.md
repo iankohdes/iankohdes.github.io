@@ -3,6 +3,8 @@ title: "Blowfish icons"
 date: 2025-06-01
 draft: false
 tags: ["hugo", "blowfish", "icons"]
+series: ["Setting up a Hugo website with the Blowfish theme"]
+series_order: 3
 ---
 
 The Blowfish theme has a [list of icons](https://blowfish.page/samples/icons/) that can be used as shortcodes. They are a mix of company names and various symbols. For my future convenience I organise them based on whether they are symbols or company icons, mainly because I intend to use the former often but not the latter.

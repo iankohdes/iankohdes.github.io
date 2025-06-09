@@ -2,7 +2,9 @@
 title: "Setting up Hugo and Blowfish"
 date: 2025-05-30
 draft: false
-tags: ["hugo", "blowfish", "github-actions"]
+tags: ["hugo", "blowfish", "github-actions", "github-pages"]
+series: ["Setting up a Hugo website with the Blowfish theme"]
+series_order: 1
 ---
 
 {{< lead >}}
