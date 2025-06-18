@@ -29,7 +29,7 @@ Specific details on the subtitle file and how I retrieve it are described in a s
 
 For the analysis, I’ve settled on the first episode of the first season of _Psycho-Pass_, hereafter referred to as S01E01. (There are three seasons in total.) The series was produced by [Production I.G](https://www.production-ig.co.jp/) and released in 2012. [Wikipedia](https://en.wikipedia.org/wiki/Psycho-Pass) describes it as a ‘cyberpunk psychological thriller’ set in a dystopian 22nd-century Japanese society.
 
-I would’ve picked one of the _Gundam_ series since I rather enjoy the mecha genre of anime, but decided to go for something very different at the last minute. Now that I’ve also started rewatching the first season of _Psycho_Pass_, I might as well commit and analyse its subtitles.
+I would’ve picked one of the _Gundam_ series since I rather enjoy the mecha genre of anime, but decided to go for something very different at the last minute. Now that I’ve also started rewatching the first season of _Psycho-Pass_, I might as well commit and analyse its subtitles.
 
 ## Data preparation
 
