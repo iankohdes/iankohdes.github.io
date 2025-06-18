@@ -55,7 +55,7 @@ I will mention this repeatedly throughout the series.
     - Percentage of unique kanji in the episode that are found in the _kyōiku_ kanji
     - Percentage of _kyōiku_ kanji that are represented in the episode
 - Proportion of unique kanji that are [_hyōgai_ kanji](https://en.wikipedia.org/wiki/Hy%C5%8Dgai_kanji)
-- Percentage of characters that are katakana
+- Percentage of (non-unique) characters that are katakana
 
 Metric definitions to follow in a subsequent article.
 
