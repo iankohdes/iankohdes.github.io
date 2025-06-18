@@ -131,6 +131,8 @@ This is the interactive menu that is navigated through using the arrow keys. Do 
 
 In the terminal, run `hugo server` and go to `http://localhost:1313` in any internet browser. Anytime changes are saved, they are immediately visible in the local version of the website.
 
+Alternatively, run `hugo server --disableFastRender` to enable full re-renders when changes are made. This option sometimes avoids rendering issues caused by changes not being picked up.
+
 ## Overriding the default fonts
 
 This took the longest amount of time to figure out and renewed my hatred of CSS. Since I found it an involved process (for someone with barely any experience with CSS), I’ve decided to make this [its own entry](https://iankohdes.github.io/posts/0002-overriding-default-fonts-in-blowfish/).
