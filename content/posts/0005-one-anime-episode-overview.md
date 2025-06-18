@@ -40,7 +40,7 @@ Furthermore, as this is a hobby project, I’m going to use a statically-typed l
 ## Metrics
 
 {{< alert >}}
-It is important to note that this analysis is conducted at the **level of individual characters**, not words. To keep things simple, no tokenisation is performed, which means I shan’t split the subtitle text into components such as parts-of-speech.
+It is important to note that this analysis is conducted at the **level of individual characters, not words.** To keep things simple, no tokenisation is performed, which means I shan’t split the subtitle text into components such as parts-of-speech.
 
 I will mention this repeatedly throughout the series.
 {{</alert>}}
@@ -57,7 +57,7 @@ I will mention this repeatedly throughout the series.
 - Proportion of unique kanji that are [_hyōgai_ kanji](https://en.wikipedia.org/wiki/Hy%C5%8Dgai_kanji)
 - Percentage of characters that are katakana
 
-Depending on how tedious it is to prepare the data, I may update this list.
+Metric definitions to follow in a subsequent article.
 
 ## Next step
 
