@@ -61,4 +61,4 @@ Depending on how tedious it is to prepare the data, I may update this list.
 
 ## Next step
 
-I have my idea, and I have my metrics. Now I need to prepare and shape the data before I can start thinking about materialising these metrics. That’s what the next article will focus on. Factoids about the Japanese language will be introduced as necessary.
+I have my idea, and I have my metrics. Now I need to prepare and shape the data before I can start thinking about materialising these metrics. That’s what the next article will focus on. Factoids about the Japanese language, anime and subtitle files will be introduced as necessary.
