@@ -8,7 +8,7 @@ series_order: 1
 ---
 
 {{< alert "github" >}}
-[This is the GitHub repository.](https://github.com/iankohdes/examining-one-anime-episodes-subtitles)
+[Click here](https://github.com/iankohdes/examining-one-anime-episodes-subtitles) for the GitHub repository.
 {{</alert>}}
 
 ## Background
