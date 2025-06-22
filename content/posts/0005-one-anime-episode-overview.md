@@ -7,6 +7,10 @@ series: ["Exploring and analysing an anime episode’s (Japanese) subtitles"]
 series_order: 1
 ---
 
+{{< alert "github" >}}
+[This is the GitHub repository.](https://github.com/iankohdes/examining-one-anime-episodes-subtitles)
+{{</alert>}}
+
 ## Background
 
 For a long time now, I’ve thought that working with text might be an interesting pursuit. I’ve always enjoyed writing, so combining the written word with programming and data analysis suits me nicely. The only problem was that I’ve never been able to think of a suitable topic, in the sense that I could never find a topic that I’d be personally interested or invested in.
