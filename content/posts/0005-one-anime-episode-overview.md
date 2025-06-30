@@ -7,8 +7,14 @@ series: ["Exploring and analysing an anime episode’s (Japanese) subtitles"]
 series_order: 1
 ---
 
-{{< alert "github" >}}
-[Click here](https://github.com/iankohdes/examining-one-anime-episodes-subtitles) for the GitHub repository.
+{{< alert "fork" >}}
+**2025-06-30. This article is in the process of being refactored.** Originally, I planned for it to be a series, with each entry representing some step of the analysis process.
+
+I will now _merge_ all of these steps into a single article. The article will still be part of a series, only now it’ll be a series focusing on the natural language processing of anime subtitles in Japanese.
+
+Once the new article is ready, I will publish it and delete this one. I am considering publishing the new article early, and building it up section-by-section rather than first waiting for all of it to be finished (which could take a few weeks).
+
+The analysis’s Git repository remains [unchanged](https://github.com/iankohdes/examining-one-anime-episodes-subtitles).
 {{</alert>}}
 
 ## Background
