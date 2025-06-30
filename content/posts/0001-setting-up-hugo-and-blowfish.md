@@ -133,6 +133,8 @@ In the terminal, run `hugo server` and go to `http://localhost:1313` in any inte
 
 Alternatively, run `hugo server --disableFastRender` to enable full re-renders when changes are made. This option sometimes avoids rendering issues caused by changes not being picked up.
 
+The Blowfish theme has a bug where builds – and thus previews – are not updated when the `draft: true` setting is used. In addition to the above flag, consider adding `--buildFuture` when starting up the server. In the Markdown file, toggle `draft: false` and set a publish date far into the future (e.g. 2100-01-01).
+
 ## Overriding the default fonts
 
 This took the longest amount of time to figure out and renewed my hatred of CSS. Since I found it an involved process (for someone with barely any experience with CSS), I’ve decided to make this [its own entry](https://iankohdes.github.io/posts/0002-overriding-default-fonts-in-blowfish/).
