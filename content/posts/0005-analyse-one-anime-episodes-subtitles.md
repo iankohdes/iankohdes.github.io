@@ -40,7 +40,7 @@ I liken _Psycho-Pass_ to a particularly violent and detailed version of _Ghost i
 
 Coming back to the topic at hand, I have **two key interests**: the programming aspect (which covers data preparation and processing) and the analysis aspect.
 
-I thus spend a great deal of time on the former. The reason is that I intend to implement this phase in [Rust](https://www.rust-lang.org/). (I’m learning the language and this is a good use case for project-based learning.) I recognise that Rust is a non-standard language of choice in an NLP context. My reasons for using it are:
+I thus spend a great deal of time on the former. The reason is that I intend to implement this phase in [Rust](https://www.rust-lang.org/). (I’m learning the language and this is a good use case for project-based learning.) I recognise that Rust is a non-standard language of choice in an NLP context, and have chosen it because:
 
 - it is statically typed,
 - it has a strong type system and I can easily create sum and product types to better model my domain,
