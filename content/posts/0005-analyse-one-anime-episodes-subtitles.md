@@ -47,7 +47,7 @@ I thus spend a great deal of time on the former. The reason is that I intend to 
 - it compiles to binary so I don’t have to grapple with virtual machines like the JVM, and
 - it has the most user-friendly error messages I’ve ever encountered (compared to other languages I’ve used like Python, Kotlin and Haskell).
 
-A cynic might comment that I’ve chosen to make life unnecessarily difficult for myself, which is fair. I might find that I’ve bitten off more than I can chew and switch back to Python for future NLP analyses. Or I might not. 🙃
+A cynic might comment that I’ve chosen to make life unnecessarily difficult for myself, which is fair. Perhaps I’ll find that I’ve bitten off more than I can chew and switch back to Python for future NLP analyses. Perhaps not. 🙃
 
 Now that you have the overall context, let’s consider the metrics I’ll calculate, because the entire data preparation process lays the foundation for them.
 
