@@ -12,7 +12,7 @@ series_order: 1
 
 I will now _merge_ all of these steps into a single article. The article will still be part of a series, only now it’ll be a series focusing on the natural language processing of anime subtitles in Japanese.
 
-Once the new article is ready, I will publish it and delete this one. I am considering publishing the new article early, and building it up section-by-section rather than first waiting for all of it to be finished (which could take a few weeks).
+Once the new article is ready, I will publish it and delete this one. If you’re impatient and want to read the article as I’m writing it, you’ll find the Markdown file [here](https://github.com/iankohdes/iankohdes.github.io/blob/main/content/posts/0005-analyse-one-anime-episodes-subtitles.md).
 
 The analysis’s Git repository remains [unchanged](https://github.com/iankohdes/examining-one-anime-episodes-subtitles).
 {{</alert>}}

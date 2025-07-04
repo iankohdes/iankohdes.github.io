@@ -160,7 +160,7 @@ fn get_subtitles_from_unit(subtitle_unit: &str) -> Vec<&str> {
 }
 ```
 
-One might question the need for the `get_subtitles_from_unit` function, since all it does is apply a method chain to a subtitle unit. The chain could be used directly in the closure in `ingest_subtitle_file` instead.
+One might question the need for the `get_subtitles_from_unit` function, since all it does is apply a method chain to a subtitle unit. The chain could be used directly in the [closure](https://doc.rust-lang.org/book/ch13-01-closures.html) in `ingest_subtitle_file` instead.
 
 I’ve chosen to retain `get_subtitles_from_unit` as it makes the code neater and more readable. I’m also able to add internal documentation to the function and explain _why_ I’m specifically skipping the first two elements. (You can read the documentation in `ingestion.rs`.)
 
