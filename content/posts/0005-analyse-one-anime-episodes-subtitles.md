@@ -8,7 +8,7 @@ series_order: 1
 ---
 
 {{< alert "github" >}}
-[Click here](https://github.com/iankohdes/examining-one-anime-episodes-subtitles/tree/main) for the link to the analysis’s GitHub repository.
+[Click here](https://github.com/iankohdes/examining-one-anime-episodes-subtitles/tree/main) to access the GitHub repository.
 {{</ alert >}}
 
 Ever thought of analysing subtitles written in one of the world’s most complicated writing system? I have, and that’s the basis for this post. Taking a look at the Japanese-language subtitles of one anime episode, I calculate some metrics and present my findings in subsequent sections.
@@ -34,9 +34,9 @@ I’ll describe these metrics momentarily.
 
 To start with, I have selected the first episode of the first season of _Psycho-Pass_, which I’ll refer to as S01E01 hereafter. The series was produced by [Production I.G](https://www.production-ig.co.jp/) and released in 2012. [Wikipedia](https://en.wikipedia.org/wiki/Psycho-Pass) describes it as a ‘cyberpunk psychological thriller’ set in a dystopian 22nd-century Japanese society.
 
-Without giving too much away, the plot revolves around a police investigation unit that hunts criminals possessing what the series refers to as high ‘crime coefficients’. Based on an individual’s crime coefficient, an overarching AI system prescribes a response that could range from stun-and-capture to immediate execution to instant vaporisation. No second chances, no appeals.
+Without giving too much away, the plot revolves around a police investigation unit that hunts criminals possessing what the series refers to as high ‘crime coefficients’. Based on an individual’s crime coefficient, an overarching AI system prescribes a mandatory response that ranges from stun-and-capture to immediate execution to instant vaporisation. No second chances, no appeals.
 
-I liken _Psycho-Pass_ to a particularly violent and detailed version of _Ghost in the Shell: Stand-Alone Complex_.
+I liken _Psycho-Pass_ to a particularly violent and graphic version of _Ghost in the Shell: Stand-Alone Complex_.
 
 Coming back to the topic at hand, I have **two key interests**: the programming aspect (which covers data preparation and processing) and the analysis aspect.
 
@@ -60,9 +60,81 @@ Now that you have the overall context, let’s consider the metrics I’ll calcu
 - Proportion of _unique_ kanji that are [_hyōgai_ kanji](https://en.wikipedia.org/wiki/Hy%C5%8Dgai_kanji).
 - Proportion of _non-unique_ characters that are katakana.
 
-I will describe these metrics in a little more detail once we get to the results section.
+I describe these metrics in a little more detail in the results section. But first, we start with the ingestion stage.
 
-Next, we move on to the data preparation phase. This is split into two stages: _data cleaning_ and _data processing_.
+## Ingestion
+
+Our very first step for this analysis sees us ingesting a raw subtitle file. I download the subtitle text for S01E01 of *Psycho-Pass* from [Jimaku](https://jimaku.cc/), a website that hosts subtitles for Japanese anime and even has API endpoints that one can use.
+
+The ingestion process is simple: I read in a subtitle file and return a single, concatenated string. To understand what the process entails, it helps to have an idea of what subtitle files look like. These typically have an `.srt` extension and their contents consist of groupings of lines.
+
+Here are the first 10 groupings of the subtitle file we’ll analyse.
+
+```text
+1
+00:00:12,846 --> 00:00:24,899
+♪～
+
+2
+00:00:46,921 --> 00:00:47,839
+（狡噛(こうがみ)）フゥ～…
+
+3
+00:01:10,361 --> 00:01:11,112
+（狡噛）うっ…！
+
+4
+00:01:14,324 --> 00:01:15,283
+（狡噛）くそっ！
+
+5
+00:01:42,644 --> 00:01:47,440
+（足音）
+
+6
+00:01:47,565 --> 00:01:50,235
+（槙島(まきしま)）その傷で よくやるもんだ
+
+7
+00:01:52,654 --> 00:01:54,280
+（朱(あかね)）きっと彼らは―
+
+8
+00:01:54,405 --> 00:01:56,157
+一目 見て
+分かったはずだ―
+
+9
+00:01:57,242 --> 00:01:59,994
+２人は
+初めて出会うより 以前から…―
+
+10
+00:02:00,161 --> 00:02:01,955
+ああなる運命だったんだろう―
+```
+
+For convenience, I call such groupings **subtitle units**. Each subtitle unit has three general components:
+
+- an index number,
+- a pair of timestamps, and
+- one or more lines of subtitle text.
+
+After reading in the subtitle file, I *normalise* its contents before extracting the text. The reason is that newlines are represented by `\r\n`, indicating that the subtitles have been prepared on a Windows machine. (Unix-like machines represent newlines with `\n`.)
+
+Below is a sample of the text when debug printed in Rust (before normalising).
+
+```text
+"\u{feff}1\r\n00:00:12,846 --> 00:00:24,899\r\n♪～\r\n\r\n2\r\n00:00:46,921 --> 00:00:47,839\r\n（狡噛(こうがみ)）フゥ～…\r\n\r\n3"
+```
+
+Normalisation involves replacing all instances of `\r\n` with `\n`:
+
+```rust
+let normalised_raw_content: String = raw_content.replace("\r\n", "\n");
+```
+
+Only after normalising am I able to extract the subtitle text from each unit and concatenate all of them into a single string. And with that, I’m now ready for the next phase: data preparation. This is split into two stages: *data cleaning* and *data processing*.
 
 ## Data cleaning
 
