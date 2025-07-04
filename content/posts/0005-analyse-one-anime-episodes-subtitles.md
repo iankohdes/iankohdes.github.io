@@ -11,7 +11,7 @@ series_order: 1
 [Click here](https://github.com/iankohdes/examining-one-anime-episodes-subtitles/tree/main) to access the GitHub repository.
 {{</ alert >}}
 
-Ever thought of analysing subtitles written in one of the world’s most complicated writing system? I have, and that’s the basis for this post. Taking a look at the Japanese-language subtitles of one anime episode, I calculate some metrics and present my findings in subsequent sections.
+Ever thought of analysing subtitles written in one of the world’s most complicated writing systems? I have, and that’s the basis for this post. Using the Japanese-language subtitles of one episode of an anime series, I calculate some metrics and present my findings in subsequent sections.
 
 It’s also my first attempt at natural language processing (NLP), which is why I want to keep things simple. This means looking at Japanese characters, not words. (In Chinese and Japanese, a word could comprise one or more characters.) In future, I hope to explore subtitles at the word level, and present analyses of greater complexity and depth.
 
@@ -34,7 +34,7 @@ I’ll describe these metrics momentarily.
 
 To start with, I have selected the first episode of the first season of _Psycho-Pass_, which I’ll refer to as S01E01 hereafter. The series was produced by [Production I.G](https://www.production-ig.co.jp/) and released in 2012. [Wikipedia](https://en.wikipedia.org/wiki/Psycho-Pass) describes it as a ‘cyberpunk psychological thriller’ set in a dystopian 22nd-century Japanese society.
 
-Without giving too much away, the plot revolves around a police investigation unit that hunts criminals possessing what the series refers to as high ‘crime coefficients’. Based on an individual’s crime coefficient, an overarching AI system prescribes a mandatory response that ranges from stun-and-capture to immediate execution to instant vaporisation. No second chances, no appeals.
+Without giving too much away, the plot revolves around a police investigation unit that hunts criminals possessing what the series refers to as high ‘crime coefficients’. Based on an individual’s crime coefficient, an overarching AI system prescribes a mandatory response that ranges from temporary paralysis to immediate execution to instant vaporisation. No second chances, no appeals.
 
 I liken _Psycho-Pass_ to a particularly violent and graphic version of _Ghost in the Shell: Stand-Alone Complex_.
 
@@ -63,6 +63,10 @@ Now that you have the overall context, let’s consider the metrics I’ll calcu
 I describe these metrics in a little more detail in the results section. But first, we start with the ingestion stage.
 
 ## Ingestion
+
+{{< alert "github" >}}
+The ingestion code is stored in `ingestion.rs` and can be viewed [here](https://github.com/iankohdes/examining-one-anime-episodes-subtitles/blob/main/src/dataprep/ingestion.rs).
+{{</alert>}}
 
 Our very first step for this analysis sees us ingesting a raw subtitle file. I download the subtitle text for S01E01 of *Psycho-Pass* from [Jimaku](https://jimaku.cc/), a website that hosts subtitles for Japanese anime and even has API endpoints that one can use.
 
@@ -134,7 +138,35 @@ Normalisation involves replacing all instances of `\r\n` with `\n`:
 let normalised_raw_content: String = raw_content.replace("\r\n", "\n");
 ```
 
-Only after normalising am I able to extract the subtitle text from each unit and concatenate all of them into a single string. And with that, I’m now ready for the data preparation phase. This is split into two stages: *data cleaning* and *data processing*.
+Only after normalising am I able to extract the subtitle text from each unit and concatenate all of them into a single string. The entire ingestion step looks like this.
+
+```rust
+pub fn ingest_subtitle_file(filepath: &str) -> std::result::Result<String, Box<dyn std::error::Error>> {
+    let raw_content: String = fs::read_to_string(filepath)?;
+    println!("{raw_content:?}");
+    let normalised_raw_content: String = raw_content.replace("\r\n", "\n");
+
+    let subtitle_units: Vec<&str> = normalised_raw_content.split("\n\n").collect();
+    let subtitles: String = subtitle_units
+        .iter()
+        .flat_map(|x| get_subtitles_from_unit(x))
+        .collect();
+
+    Ok(subtitles)
+}
+
+fn get_subtitles_from_unit(subtitle_unit: &str) -> Vec<&str> {
+    subtitle_unit.split('\n').skip(2).collect()
+}
+```
+
+One might question the need for the `get_subtitles_from_unit` function, since all it does is apply a method chain to a subtitle unit. The chain could be used directly in the closure in `ingest_subtitle_file` instead.
+
+I’ve chosen to retain `get_subtitles_from_unit` as it makes the code neater and more readable. I’m also able to add internal documentation to the function and explain _why_ I’m specifically skipping the first two elements. (You can read the documentation in `ingestion.rs`.)
+
+It is particularly useful that one can simply collect the extracted subtitle text into a single value of `String` type. `collect` makes life so much easier!
+
+With that, I’m now ready for the data preparation phase. This is split into two stages: *data cleaning* and *data processing*.
 
 ## Data cleaning
 
