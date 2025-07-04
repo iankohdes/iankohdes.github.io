@@ -134,7 +134,7 @@ Normalisation involves replacing all instances of `\r\n` with `\n`:
 let normalised_raw_content: String = raw_content.replace("\r\n", "\n");
 ```
 
-Only after normalising am I able to extract the subtitle text from each unit and concatenate all of them into a single string. And with that, I’m now ready for the next phase: data preparation. This is split into two stages: *data cleaning* and *data processing*.
+Only after normalising am I able to extract the subtitle text from each unit and concatenate all of them into a single string. And with that, I’m now ready for the data preparation phase. This is split into two stages: *data cleaning* and *data processing*.
 
 ## Data cleaning
 
