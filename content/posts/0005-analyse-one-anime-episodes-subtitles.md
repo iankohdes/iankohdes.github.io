@@ -228,25 +228,39 @@ The Japanese writing system uses _three_ scripts at the same time: kanji, hiraga
 Each script has its own use case. Kanji is used for [content words](https://en.wikipedia.org/wiki/Content_word) and can also be written in hiragana. Hiragana representations of kanji aid in pronunciation, and hiragana characters also indicate grammatical features like particles and subject markers. Finally, katakana is used for loan words and technical terms.
 {{</alert>}}
 
-It’s quite easy to filter out characters in the hiragana and katakana [syllabaries](https://en.wikipedia.org/wiki/Syllabary), because they are relatively few and amount to 100+ characters in total. The full set of kanji, on the other extreme, amounts to between 40,000 and 50,000 characters.
+It’s quite easy to exempt characters in the hiragana and katakana [syllabaries](https://en.wikipedia.org/wiki/Syllabary) from removal, because they are relatively few and amount to 100+ characters in total. The full set of kanji, on the other extreme, amounts to between 40,000 and 50,000 characters.
 
-The majority of kanji are rarely or never used in daily life. One could thus adopt a pragmatic approach and use a set of commonly-used kanji as a basis for filtering. This will work most of the time, but risks accidentally filtering out rarely-used kanji if they should appear in a subtitle unit. More importantly, one would first need to compile such a list.
+The majority of kanji are rarely or never used in daily life. One might adopt a pragmatic approach and use a set of commonly-used kanji as a basis for filtering. This would work most of the time, but risks accidentally excluding rarely-used kanji if they should appear in a subtitle unit. More importantly, one would first need to compile such a list.
 
 {{< alert "comment" >}}
 This list does exist, by the way! I have a dictionary collection of a little over 13,000 kanji with definitions, stroke counts and pronunciation guides, among other metadata. I shan’t use it in this project but intend to do so in future ones.
 {{</alert>}}
 
-Instead, I take a more manual approach to defining my blacklist of unwanted characters. Taking the single, concatenated string of subtitle text for S01E01, I deduplicate it and sort its characters.
+Hence, I adopt a more manual approach to define my blacklist of unwanted characters. Taking the single, concatenated string of subtitle text for S01E01, I deduplicate it and sort its characters.
 
-My reasoning  – and hope – is that the kanji, hiragana and katakana characters would be lumped together, while all other unwanted characters are bunched together before and after the Japanese ones. In this instance my deduction pays off, and this is the result:
+The helper function that performs this action, `helper_dedupe_and_sort`, can be used on an ad hoc basis when examining subtitle texts from single or multiple episodes. (As long as they are concatenated into one string, that is.) The `BTreeSet` collection is a wonderful convenience to have here, performing both the deduplication and sorting in a single step.
+
+```rust
+pub fn helper_dedupe_and_sort(xs: &str) {
+    let deduped_and_sorted: String = xs
+        .chars()
+        .collect::<BTreeSet<_>>()
+        .into_iter()
+        .collect();
+
+    println!("{deduped_and_sorted}");
+}
+```
+
+My reasoning for `helper_dedupe_and_sort` is that the kanji, hiragana and katakana characters would be lumped together, while all other unwanted characters are bunched before and after the Japanese ones. In this instance my deduction pays off. Here is the result:
 
 ```text
  ()01269―…♪々あいうえおかがきぎくぐけげこごさざしじすずせぜそぞただちっつづてでとどなにぬねのはばぱびぶへべぼぽまみむめもゃやょよらりるれろわをんァアィイゥウェエォオカガキギクグケゲコサザシジスセタダチ刻前剤力助効動包区千厄去取受口可合同向君告味命員問噂噛器回囲圧在地型執基報場塊塚声大夫奮女好威娘婆婚嫌嬢子守安完官定宜宣害家寄対専小就尽局届属島巣己席帯常年度座廃引張強当影役彼征待後得心忘応念怒思性悟望本朱来柄染根格械棄棒検様槙機欲止正死段殺民気求治況泥活流浪浮深混準潜濁災無照片物犬犯状狙狡狩猟獣獲現理生用画界療発登的皆監目相真眠着知研破確社私窟立笛米精納紹終結給絶継続綻緊緒締練縢繰罪羽老考者耐聖香駆高鳴！（）１２３４？ＫＴ～･
 ```
 
-The Japanese characters are sorted such that hiragana appears first, followed by katakana and finally by kanji.
+Take a look at the unwanted characters at the end of the above string. These are full-width and thus intended to complement Japanese words. We also see the Japanese tilde, ～, which differs noticeably from its Western counterpart, ~.
 
-Take a look at the unwanted characters at the end of the string. These are full-width and thus intended to complement Japanese words. We also see the Japanese tilde, ～, which differs noticeably from its Western counterpart, ~.
+The Japanese characters are sorted such that hiragana appears first, followed by katakana and finally by kanji. The alert box below focuses on a subset of these characters.
 
 {{< alert "language" >}}
 In the above listing, you’ll spot characters with slight variations of themselves. These variations contain diacritics, of which Japanese has two types: [_dakuten_ and _handakuten_](https://en.wikipedia.org/wiki/Dakuten_and_handakuten).
