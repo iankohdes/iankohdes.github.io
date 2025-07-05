@@ -196,7 +196,7 @@ To understand why we _don’t_ want content enclosed in parentheses, it’s help
 
 In this subtitle unit we see two types of parentheses. One is the ‘regular’ pair that most of the world uses, `()`. The other, `（）`, is used in East Asian languages like Japanese and Chinese.
 
-Parenthesised content provides contextual information that isn’t explicitly available to viewers who do not toggle the subtitles. (Examples include character names and descriptions of sounds.) Since they aren’t part of the dialogue, I prefer to exclude them from further analysis.
+Parenthesised content provides contextual information that is unavailable to viewers who do not toggle the subtitles. (Examples include character names and descriptions of sounds.) Since they aren’t part of the dialogue, I prefer to exclude them from further analysis.
 
 The core logic uses a counter whose range of values is always positive (and includes zero) due to the `saturating_sub` method. When processing one character in a string, if the counter is at `0`, the character is retained. If the counter has any value other than `0`, the character is removed. The counter’s value increments or decrements depending on whether the logic encounters an opening or closing parenthesis.
 
@@ -262,7 +262,7 @@ Take the following as an example:
 がぎぐげご
 ```
 
-The characters か, き, く, け and こ represent the K-row of the hiragana table, and are pronounced [ka], [ki], [ku], [ke] and [ko] respectively. These characters’ pronunciations undergo a slight change when the _dakuten_ is applied, such that the syllable-initial plosive [k] becomes voiced: [ga], [gi], [gɯ], [ge] and [go].
+The characters か, き, く, け and こ represent the K-row of the hiragana table and are pronounced [ka], [ki], [ku], [ke] and [ko] respectively. These characters’ pronunciations undergo a slight change when the _dakuten_ is applied, such that the syllable-initial plosive [k] becomes voiced: [ga], [gi], [gɯ], [ge] and [go].
 {{</alert>}}
 
 At any rate, my list of unwanted characters can be compiled by visual inspection:
@@ -291,9 +291,9 @@ Within Japanese, the small kana are used for purposes such as
 - indicating double consonants (っ/ッ only), and
 - indicating glottal stops at the ends of words or sentences.
 
-っ and ッ belong to the hiragana and katakana syllabaries respectively. (These syllabaries have a one-to-one mapping to each other, and thus have the same number of characters each.)
+っ and ッ belong to the hiragana and katakana syllabaries respectively. These syllabaries have a one-to-one mapping to each other, and thus have identical numbers of characters (not counting the extended katakana characters used outside Japanese).
 
-**Small note:** small kana are _not_ analogous to the lowercase letters used in Latin-based alphabets.
+**Small note:** small kana are _not_ analogous to the lowercase letters used in Latin-based alphabets. Japanese is not an alphabet-based language.
 {{</alert>}}
 
 While the small kana are distinct from their regular-sized counterparts, I convert them to regular size to keep my character-level analysis simple. (The alternative would be to remove them from the analysis.)
