@@ -390,7 +390,7 @@ fn convert_mini_kana_to_regular(
 }
 ```
 
-At this point, we have finished the first stage of the data preparation phase. The next stage processes the cleaned data in preparation for the analysis.
+At this point, we have finished the first stage of the data preparation phase. The next stage processes the cleaned data for use in the analysis.
 
 {{< alert "circle-info" >}}
 In `clean_subtitles`, I apply a function called `ingest_json_file` but have said nothing about it so far. Its code is found in `ingestion.rs` – [click here](https://github.com/iankohdes/examining-one-anime-episodes-subtitles/blob/main/src/dataprep/ingestion.rs) to view it.
