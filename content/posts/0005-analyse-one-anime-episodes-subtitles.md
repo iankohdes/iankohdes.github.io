@@ -233,7 +233,7 @@ It’s quite easy to filter out characters in the hiragana and katakana [syllaba
 The majority of kanji are rarely or never used in daily life. One could thus adopt a pragmatic approach and use a set of commonly-used kanji as a basis for filtering. This will work most of the time, but risks accidentally filtering out rarely-used kanji if they should appear in a subtitle unit. More importantly, one would first need to compile such a list.
 
 {{< alert "comment" >}}
-This list does exist, by the way! I have a dictionary collection of a little over 13,000 kanji with definitions, stroke counts and pronunciation guides, among other metadata. I shan’t use it in this project to keep things simple, but will likely do so in future NLP projects.
+This list does exist, by the way! I have a dictionary collection of a little over 13,000 kanji with definitions, stroke counts and pronunciation guides, among other metadata. I shan’t use it in this project but intend to do so in future ones.
 {{</alert>}}
 
 Instead, I take a more manual approach to defining my blacklist of unwanted characters. Taking the single, concatenated string of subtitle text for S01E01, I deduplicate it and sort its characters.
@@ -267,7 +267,7 @@ At any rate, my list of unwanted characters can be compiled by visual inspection
 ()01269―…♪ ！（）１２３４？ＫＴ～･
 ```
 
-Removing these characters is a simple matter of filtering the concatenated string for characters that are _not_ in this list.
+Removing these characters is a matter of filtering the concatenated string for characters that are _not_ in this list.
 
 ### Convert small kanas to their regular-sized counterparts
 
@@ -292,7 +292,7 @@ Within Japanese, the small kana are used for purposes such as
 **Small note:** small kana are _not_ analogous to the lowercase letters used in Latin-based alphabets. Japanese is not an alphabet-based language.
 {{</alert>}}
 
-While the small kana are distinct from their regular-sized counterparts, I convert them to regular size to keep my character-level analysis simple. (The alternative would be to remove them from the analysis.)
+While the small kana are distinct from their regular-sized counterparts, I convert them to regular size for simplicity’s sake. (The alternative would be to remove them from the analysis.)
 
 Below is the function that performs the conversion. The value that is passed as the second parameter, `kana_mapping`, is created in the `clean_subtitles` function. We’ll soon see its creation in the next subsection.
 
