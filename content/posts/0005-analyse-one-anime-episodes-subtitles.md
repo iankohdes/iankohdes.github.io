@@ -13,7 +13,7 @@ series_order: 1
 
 Ever thought of analysing subtitles written in one of the world’s most complicated writing systems? I have. Using the Japanese-language subtitles of one episode of an anime series, I calculate some metrics and present my findings.
 
-It’s my first attempt at natural language processing (NLP) so I wish to keep things simple. This means focusing on Japanese characters, not words. (In Chinese and Japanese, a word could comprise one or more characters.) Put differently, this analysis features no tokenisation. In future, I hope to explore subtitles at the word level, and present analyses of greater complexity and depth.
+It’s my first attempt at natural language processing (NLP) so I wish to keep things simple. This means focusing on Japanese characters, not words. (In Chinese and Japanese, a word could comprise one or more characters.) Put differently, this analysis features no tokenisation. In future, I hope to explore subtitles at the word level and present analyses of greater complexity and depth.
 
 For now, allow me to start with some contextual information that’ll be helpful for understanding what follows.
 
@@ -28,7 +28,7 @@ My analysis has the following steps:
 
 I’ll describe these metrics momentarily.
 
-To start with, I have selected the first episode of the first season of _Psycho-Pass_, which I’ll refer to as S01E01 hereafter. The series was produced by [Production I.G](https://www.production-ig.co.jp/) and released in 2012. [Wikipedia](https://en.wikipedia.org/wiki/Psycho-Pass) describes it as a ‘cyberpunk psychological thriller’ set in a dystopian 22nd-century Japanese society.
+To start with, I have selected the first episode of the first season of _Psycho-Pass_, hereafter referred to as S01E01. The series was produced by [Production I.G](https://www.production-ig.co.jp/) and released in 2012. [Wikipedia](https://en.wikipedia.org/wiki/Psycho-Pass) describes it as a ‘cyberpunk psychological thriller’ set in a dystopian 22nd-century Japanese society.
 
 Without giving too much away, the plot revolves around a police investigation unit that hunts criminals possessing what the series refers to as high ‘crime coefficients’. Based on an individual’s crime coefficient, an overarching AI system prescribes a mandatory response that ranges from temporary paralysis to immediate execution to instant vaporisation. No second chances, no appeals.
 
