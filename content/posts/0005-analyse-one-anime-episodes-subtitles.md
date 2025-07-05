@@ -60,7 +60,7 @@ Now that you have the overall context, let’s consider the metrics I’ll calcu
 - Proportion of _unique_ kanji that are [_hyōgai_ kanji](https://en.wikipedia.org/wiki/Hy%C5%8Dgai_kanji).
 - Proportion of _non-unique_ characters that are katakana.
 
-I describe these metrics in a little more detail in the results section. But first, we start with the ingestion stage.
+I describe these metrics in a little more detail in the results section. We first move on the ingestion stage.
 
 ## Ingestion
 
@@ -274,6 +274,10 @@ At any rate, my list of unwanted characters can be compiled by visual inspection
 Removing these characters is a simple matter of filtering the concatenated string for characters that are _not_ in this list.
 
 ### Convert small kanas to their regular-sized counterparts
+
+{{<alert>}}
+I will likely remove this cleaning step in future analyses when I start tokenising my text. Small kana convey important information and converting them into regular size strips that information away. In the worst-case scenario, conversion could interfere with tokenisation and return inaccurate results.
+{{</alert>}}
 
 As we learnt in the previous section, the kana syllabaries are used for grammatical elements, loan words and technical terms. Hiragana is also used as an alternative script to kanji. There is a complication to the kana scripts, and that is the existence of small kana characters in both hiragana and katakana.
 
