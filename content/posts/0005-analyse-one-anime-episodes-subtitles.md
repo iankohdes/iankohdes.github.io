@@ -36,7 +36,7 @@ I liken _Psycho-Pass_ to a particularly violent and graphic version of _Ghost in
 
 Coming back to the topic at hand, I have **two key interests**: the programming aspect (which covers data preparation and processing) and the analysis aspect.
 
-I thus spend a great deal of time on the former. The reason is that I intend to implement this phase in [Rust](https://www.rust-lang.org/). (I’m learning the language and this is a good use case for project-based learning.) I recognise that Rust is a non-standard language of choice in an NLP context, and have chosen it because:
+I thus spend a great deal of time on the former. The reason is that I intend to implement this phase in [Rust](https://www.rust-lang.org/). (I’m learning the language and this is a good use case for project-based learning.) I recognise that Rust is a non-standard language of choice in an NLP context, and have chosen it because
 
 - it is statically typed,
 - it has a strong type system and I can easily create sum and product types to better model my domain,
@@ -45,7 +45,7 @@ I thus spend a great deal of time on the former. The reason is that I intend to 
 
 A cynic might comment that I’ve chosen to make life unnecessarily difficult for myself, which is fair. Perhaps I’ll find that I’ve bitten off more than I can chew and switch back to Python for future NLP analyses. Perhaps not. 🙃
 
-Now that you have the overall context, let’s consider the metrics I’ll calculate, because the entire data preparation process lays the foundation for them.
+Now that you have the overall context, let me introduce the metrics I’ll calculate, because the entire data preparation process lays the foundation for them.
 
 ## Metrics
 
@@ -325,14 +325,14 @@ fn convert_mini_kana_to_regular(
 It’s difficult to visualise how the cleaning steps work together to clean a string of subtitle text. Here’s the full cleaning process for context, with the internal documentation stripped out for clarity. (You can read it in `cleaning.rs` if you wish.)
 
 ```rust
+const MINI_KANA_JSON_PATH: &str = "data/raw/mini_kana_mappings.json";
+const UNWANTED_CHARACTERS_PATH: &str = "data/raw/unwanted_characters.txt";
+
 #[derive(Deserialize, Eq, PartialEq, Hash, Debug)]
 struct SmallKana(char);
 
 #[derive(Deserialize, Eq, PartialEq, Hash, Debug)]
 struct RegularKana(char);
-
-const MINI_KANA_JSON_PATH: &str = "data/raw/mini_kana_mappings.json";
-const UNWANTED_CHARACTERS_PATH: &str = "data/raw/unwanted_characters.txt";
 
 pub fn clean_subtitles(raw_input: &str) -> Result<String, Box<dyn std::error::Error>> {
     let unwanted_characters_raw = fs::read_to_string(UNWANTED_CHARACTERS_PATH)?;
@@ -364,7 +364,7 @@ fn remove_parentheses_and_contents(input: &str) -> String {
             '(' | '（' => depth += 1,
             ')' | '）' => depth = depth.saturating_sub(1),
             _ if depth == 0 => result.push(char),
-            _ => {}  // Reminder: returns unit type (i.e. does nothing)
+            _ => {}
         }
     }
 
