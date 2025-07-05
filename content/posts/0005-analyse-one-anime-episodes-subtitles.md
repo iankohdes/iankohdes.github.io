@@ -11,13 +11,9 @@ series_order: 1
 [Click here](https://github.com/iankohdes/examining-one-anime-episodes-subtitles/tree/main) to access the GitHub repository.
 {{</ alert >}}
 
-Ever thought of analysing subtitles written in one of the world’s most complicated writing systems? I have, and that’s the basis for this post. Using the Japanese-language subtitles of one episode of an anime series, I calculate some metrics and present my findings in subsequent sections.
+Ever thought of analysing subtitles written in one of the world’s most complicated writing systems? I have. Using the Japanese-language subtitles of one episode of an anime series, I calculate some metrics and present my findings.
 
-It’s also my first attempt at natural language processing (NLP), which is why I want to keep things simple. This means looking at Japanese characters, not words. (In Chinese and Japanese, a word could comprise one or more characters.) In future, I hope to explore subtitles at the word level, and present analyses of greater complexity and depth.
-
-{{< alert >}}
-This analysis is restricted to Japanese **characters**, not words, and therefore doesn’t feature any tokenisation.
-{{</ alert >}}
+It’s my first attempt at natural language processing (NLP) so I wish to keep things simple. This means focusing on Japanese characters, not words. (In Chinese and Japanese, a word could comprise one or more characters.) Put differently, this analysis features no tokenisation. In future, I hope to explore subtitles at the word level, and present analyses of greater complexity and depth.
 
 For now, allow me to start with some contextual information that’ll be helpful for understanding what follows.
 
