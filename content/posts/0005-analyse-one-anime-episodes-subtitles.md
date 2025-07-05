@@ -170,4 +170,226 @@ With that, I’m now ready for the data preparation phase. This is split into tw
 
 ## Data cleaning
 
+{{< alert "github" >}}
+All cleaning functions and data types are stored in `cleaning.rs` and can be viewed [here](https://github.com/iankohdes/examining-one-anime-episodes-subtitles/blob/main/src/dataprep/cleaning.rs).
+{{</alert>}}
+
+Data cleaning is done by a function called `clean_subtitles`. Its only argument is a (borrowed) string, which is nice because it's scalable – I could apply `clean_subtitles` on text from one subtitle unit, or on a concatenated string containing text from an entire anime series. In this section we take a look at what happens behind the scenes.
+
+Cleaning involves the following three steps that are executed _in this order_:
+
+- remove parentheses and their contents,
+- remove unwanted characters, and
+- convert small kanas to their regular-sized counterparts.
+
+`clean_subtitles` returns a `Result` that, in the successful case, can be unwrapped into a `String` type.
+
+### Remove parentheses and their contents
+
+To understand why we _don’t_ want content enclosed in parentheses, it’s helpful to see what such subtitles look like.
+
+```text
+2
+00:00:46,921 --> 00:00:47,839
+（狡噛(こうがみ)）フゥ～…
+```
+
+In this subtitle unit we see two types of parentheses. One is the ‘regular’ pair that most of the world uses, `()`. The other, `（）`, is used in East Asian languages like Japanese and Chinese.
+
+Parenthesised content provides contextual information that isn’t explicitly available to viewers who do not toggle the subtitles. (Examples include character names and descriptions of sounds.) Since they aren’t part of the dialogue, I prefer to exclude them from further analysis.
+
+The core logic uses a counter whose range of values is always positive (and includes zero) due to the `saturating_sub` method. When processing one character in a string, if the counter is at `0`, the character is retained. If the counter has any value other than `0`, the character is removed. The counter’s value increments or decrements depending on whether the logic encounters an opening or closing parenthesis.
+
+```rust
+fn remove_parentheses_and_contents(input: &str) -> String {
+    let mut result = String::new();
+    let mut depth: u32 = 0;
+
+    for char in input.chars() {
+        match char {
+            '(' | '（' => depth += 1,
+            ')' | '）' => depth = depth.saturating_sub(1),
+            _ if depth == 0 => result.push(char),
+            _ => {}
+        }
+    }
+
+    result
+}
+```
+
+A weakness of the logic, as seen in the above code listing, is that it does not check for equal numbers of opening and closing parentheses. An excess of closing parentheses likely has a limited impact since decrements are saturated at zero; an excess of opening parentheses, however, could severely truncate a string and return an incorrect value.
+
+I have no intention to address this issue in the current project. My stance might change in a subsequent one if need be.
+
+### Remove unwanted characters
+
+This is probably the most self-explanatory of the cleaning steps. Yet, because Japanese is not alphabet based, defining the set of unwanted characters isn’t as straightforward as one might hope.
+
+{{< alert "language" >}}
+The Japanese writing system uses _three_ scripts at the same time: kanji, hiragana and katakana. All are derived from Chinese characters: kanji is fully based on (traditional) Chinese characters, hiragana is based on cursive writing and katakana is based on fragments of Chinese characters.
+
+Each script has its own use case. Kanji is used for [content words](https://en.wikipedia.org/wiki/Content_word) and can also be written in hiragana. Hiragana representations of kanji aid in pronunciation, and hiragana characters also indicate grammatical features like particles and subject markers. Finally, katakana is used for loan words and technical terms.
+{{</alert>}}
+
+It’s quite easy to filter out characters in the hiragana and katakana [syllabaries](https://en.wikipedia.org/wiki/Syllabary), because they are relatively few and amount to 100+ characters in total. The full set of kanji, on the other extreme, amounts to between 40,000 and 50,000 characters.
+
+The majority of kanji are rarely or never used in daily life. One could thus adopt a pragmatic approach and use a set of commonly-used kanji as a basis for filtering. This will work most of the time, but risks accidentally filtering out rarely-used kanji if they should appear in a subtitle unit. More importantly, one would first need to compile such a list.
+
+{{< alert "comment" >}}
+This list does exist, by the way! I have a dictionary collection of a little over 13,000 kanji with definitions, stroke counts and pronunciation guides, among other metadata. I shan’t use it in this project to keep things simple, but will likely do so in future NLP projects.
+{{</alert>}}
+
+Instead, I take a more manual approach to defining my blacklist of unwanted characters. Taking the single, concatenated string of subtitle text for S01E01, I deduplicate it and sort its characters.
+
+My reasoning  – and hope – is that the kanji, hiragana and katakana characters would be lumped together, while all other unwanted characters are bunched together before and after the Japanese ones. In this instance my deduction pays off, and this is the result:
+
+```text
+ ()01269―…♪々あいうえおかがきぎくぐけげこごさざしじすずせぜそぞただちっつづてでとどなにぬねのはばぱびぶへべぼぽまみむめもゃやょよらりるれろわをんァアィイゥウェエォオカガキギクグケゲコサザシジスセタダチ刻前剤力助効動包区千厄去取受口可合同向君告味命員問噂噛器回囲圧在地型執基報場塊塚声大夫奮女好威娘婆婚嫌嬢子守安完官定宜宣害家寄対専小就尽局届属島巣己席帯常年度座廃引張強当影役彼征待後得心忘応念怒思性悟望本朱来柄染根格械棄棒検様槙機欲止正死段殺民気求治況泥活流浪浮深混準潜濁災無照片物犬犯状狙狡狩猟獣獲現理生用画界療発登的皆監目相真眠着知研破確社私窟立笛米精納紹終結給絶継続綻緊緒締練縢繰罪羽老考者耐聖香駆高鳴！（）１２３４？ＫＴ～･
+```
+
+The Japanese characters are sorted such that hiragana appears first, followed by katakana and finally by kanji.
+
+Take a look at the unwanted characters at the end of the string. These are full-width and thus intended to complement Japanese words. We also see the Japanese tilde, ～, which differs noticeably from its Western counterpart, ~.
+
+{{< alert "language" >}}
+In the above listing, you’ll spot characters with slight variations of themselves. These variations contain diacritics, of which Japanese has two types: [_dakuten_ and _handakuten_](https://en.wikipedia.org/wiki/Dakuten_and_handakuten).
+
+Take the following as an example:
+
+```text
+かきくけこ
+がぎぐげご
+```
+
+The characters か, き, く, け and こ represent the K-row of the hiragana table, and are pronounced [ka], [ki], [ku], [ke] and [ko] respectively. These characters’ pronunciations undergo a slight change when the _dakuten_ is applied, such that the syllable-initial plosive [k] becomes voiced: [ga], [gi], [gɯ], [ge] and [go].
+{{</alert>}}
+
+At any rate, my list of unwanted characters can be compiled by visual inspection:
+
+```text
+()01269―…♪ ！（）１２３４？ＫＴ～･
+```
+
+Removing these characters is a simple matter of filtering the concatenated string for characters that are _not_ in this list.
+
+### Convert small kanas to their regular-sized counterparts
+
+As we learnt in the previous section, the kana syllabaries are used for grammatical elements, loan words and technical terms. Hiragana is also used as an alternative script to kanji. There is a complication to the kana scripts, and that is the existence of small kana characters in both hiragana and katakana.
+
+{{< alert "language" >}}
+Certain hiragana and katakana characters have smaller versions of themselves. Small kana are more prevalent in katakana than in hiragana, although not all of the small katakana are used in Japanese – several are used in the [Ainu language](https://en.wikipedia.org/wiki/Ainu_language), which is [written](https://en.wikipedia.org/wiki/Ainu_language#Special_katakana_for_the_Ainu_language) entirely using the katakana syllabary.
+
+Within Japanese, the small kana are used for purposes such as
+
+- forming digraphs ([_yōon_](https://en.wikipedia.org/wiki/Y%C5%8Don)),
+- extending vowel length,
+- indicating double consonants (っ/ッ only), and
+- indicating glottal stops at the ends of words or sentences.
+
+っ and ッ belong to the hiragana and katakana syllabaries respectively. (These syllabaries have a one-to-one mapping to each other, and thus have the same number of characters each.)
+
+**Small note:** small kana are _not_ analogous to the lowercase letters used in Latin-based alphabets.
+{{</alert>}}
+
+While the small kana are distinct from their regular-sized counterparts, I convert them to regular size to keep my character-level analysis simple. (The alternative would be to remove them from the analysis.)
+
+Below is the function that performs the conversion. The value that is passed as the second parameter, `kana_mapping`, is created in the `clean_subtitles` function. We’ll soon see its creation in the next subsection.
+
+```rust
+#[derive(Deserialize, Eq, PartialEq, Hash, Debug)]
+struct SmallKana(char);
+
+#[derive(Deserialize, Eq, PartialEq, Hash, Debug)]
+struct RegularKana(char);
+
+fn convert_mini_kana_to_regular(
+    input: &char,
+    kana_mapping: &HashMap<SmallKana, RegularKana>,
+) -> char {
+    let typed_input = SmallKana(*input);
+
+    let unwrapped_output: char = match kana_mapping.get(&typed_input) {
+        Some(regular_kana) => regular_kana.0,
+        None => typed_input.0
+    };
+
+    unwrapped_output
+}
+```
+
+`convert_mini_kana_to_regular` reminds me a bit of Haskell because of the pattern matching, newtypes (`SmallKana` and `RegularKana`) and `Option` type. Even the derivation of the traits is similar to defining a new type and then deriving type classes to give it some default functionality.
+
+### Full cleaning function
+
+It’s difficult to visualise how the cleaning steps work together to clean a string of subtitle text. Here’s the full cleaning process for context, with the internal documentation stripped out for clarity. (You can read it in `cleaning.rs` if you wish.)
+
+```rust
+#[derive(Deserialize, Eq, PartialEq, Hash, Debug)]
+struct SmallKana(char);
+
+#[derive(Deserialize, Eq, PartialEq, Hash, Debug)]
+struct RegularKana(char);
+
+const MINI_KANA_JSON_PATH: &str = "data/raw/mini_kana_mappings.json";
+const UNWANTED_CHARACTERS_PATH: &str = "data/raw/unwanted_characters.txt";
+
+pub fn clean_subtitles(raw_input: &str) -> Result<String, Box<dyn std::error::Error>> {
+    let unwanted_characters_raw = fs::read_to_string(UNWANTED_CHARACTERS_PATH)?;
+    let unwanted_characters: HashSet<char> =
+        unwanted_characters_raw.chars().collect();
+
+    let mini_kana_mappings: HashMap<SmallKana, RegularKana> =
+        ingest_json_file(MINI_KANA_JSON_PATH)?;
+
+    let parentheses_and_their_contents_removed: String =
+        remove_parentheses_and_contents(raw_input);
+
+    let unwanted_chars_removed_and_small_kana_as_regular: String =
+        parentheses_and_their_contents_removed
+            .chars()
+            .filter(|x: &char| !unwanted_characters.contains(x))
+            .map(|x: char| convert_mini_kana_to_regular(&x, &mini_kana_mappings))
+            .collect();
+
+    Ok(unwanted_chars_removed_and_small_kana_as_regular)
+}
+
+fn remove_parentheses_and_contents(input: &str) -> String {
+    let mut result = String::new();
+    let mut depth: u32 = 0;
+
+    for char in input.chars() {
+        match char {
+            '(' | '（' => depth += 1,
+            ')' | '）' => depth = depth.saturating_sub(1),
+            _ if depth == 0 => result.push(char),
+            _ => {}  // Reminder: returns unit type (i.e. does nothing)
+        }
+    }
+
+    result
+}
+
+fn convert_mini_kana_to_regular(
+    input: &char,
+    kana_mapping: &HashMap<SmallKana, RegularKana>,
+) -> char {
+    let typed_input = SmallKana(*input);
+
+    let unwrapped_output: char = match kana_mapping.get(&typed_input) {
+        Some(regular_kana) => regular_kana.0,
+        None => typed_input.0
+    };
+
+    unwrapped_output
+}
+```
+
+At this point, we have finished the first stage of the data preparation phase. The next stage processes the cleaned data in preparation for the analysis.
+
+{{< alert "circle-info" >}}
+In `clean_subtitles`, I apply a function called `ingest_json_file` but have said nothing about it so far. Its code is found in `ingestion.rs` – [click here](https://github.com/iankohdes/examining-one-anime-episodes-subtitles/blob/main/src/dataprep/ingestion.rs) to view it.
+{{</alert>}}
+
 ## Data processing
