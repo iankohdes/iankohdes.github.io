@@ -1,5 +1,5 @@
 ---
-title: "Analyse an anime episode’s (Japanese) subtitles"
+title: "Analysing the Japanese characters in an anime episode"
 date: 2100-01-01
 draft: false
 tags: ["anime", "term-frequency", "japanese", "subtitles", "psycho-pass"]
@@ -305,7 +305,7 @@ Within Japanese, the small kana are used for purposes such as
 
 っ and ッ – both pronounced [tsɯ] – belong to the hiragana and katakana syllabaries respectively. These syllabaries have a one-to-one mapping to each other, and thus have identical numbers of characters (not counting the extended katakana characters used outside Japanese).
 
-**Small note:** small kana are _not_ analogous to the lowercase letters used in Latin-based alphabets. Japanese is not an alphabet-based language.
+**Small note:** small kana are _not_ analogous to the lowercase letters used in Latin-based alphabets. Once again, Japanese does not use an alphabet.
 {{</alert>}}
 
 While the small kana are distinct from their regular-sized counterparts, I convert them to regular size for simplicity’s sake. (The alternative would be to remove them from the analysis.)
