@@ -13,5 +13,11 @@ pageRef = "posts"
 identifier = "TgkPCDW6gf"
 weight = 9_999
 
+[[main]]
+name = "Tags"
+pageRef = "tags"
+identifier = "hSsyUr6J87CbQH6rFmo2"
+weight = 9_999
+
 [[footer]]
 none = "none"
