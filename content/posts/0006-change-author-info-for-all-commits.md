@@ -19,7 +19,9 @@ git filter-branch -f --env-filter \
 GIT_COMMITTER_NAME='committed-name'; GIT_COMMITTER_EMAIL='committed-email';" HEAD
 ```
 
-(Make sure to update the information for all four fields, not just `GIT_AUTHOR_NAME` and `GIT_AUTHOR_EMAIL`!)
+{{< alert "comment" >}}
+Make sure to update the information for all four fields, not just `GIT_AUTHOR_NAME` and `GIT_AUTHOR_EMAIL`!
+{{< /alert >}}
 
 To verify that the author commit information has indeed been updated, we once again type `git log`.
 
