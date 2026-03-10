@@ -1,5 +1,5 @@
 ---
-title: "Change author information for all commits"
+title: "Change author information for all Git commits"
 date: 2026-03-10
 draft: false
 tags: ["git", "github"]
