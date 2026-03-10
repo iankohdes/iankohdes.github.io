@@ -21,7 +21,7 @@ Now imagine writing code in Notepad++, running it in [IDLE](https://docs.python.
 All I remember about regular expressions back then is a quote advising the judicious use of regexes, lest one end up with two problems instead of the original one.
 {{< /alert >}}
 
-I can’t even remember if we wrote our code in Python 2 or Python 3, since at that point Python 3 was fairly new and most Python code was still of the older variety. I get the feeling that we used Python 2.
+I can’t even remember if we wrote our code in Python 2 or Python 3, since at that point Python 3 was fairly new and most Python code was still of the older variety. I get the impression that we used Python 2.
 
 Eventually, it was time for us to work on our final project, which was to be individually done and submitted. The details are vague, but we had to use the NLTK to parse and tokenise and tag some text corpus and then do something with the refined data. (Can’t quite remember.) I was hoping that I still had my code somewhere so that I could read it and cringe / laugh at my noobness.
 
