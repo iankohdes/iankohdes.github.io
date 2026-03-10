@@ -31,7 +31,7 @@ If it weren’t for that fourth-year CS student who kindly helped me, I would ha
 
 By the end of the semester, I had got to know three fellow classmates quite well. One of them was the one whose dad made him learn C. As we finished the first draft of our final project’s code and ran it on the corpus, one thing became painfully clear: our code was _slow_. This was partly because Python wasn’t particularly fast at the time, and mostly because we were simply writing highly inefficient programs.
 
-Let me give you some numbers to illustrate just how bad we were. My code took three to four hours to do what it needed to do with the corpus data. Two of the abovementioned classmates had similar running times. The one who learnt C had code that ran quicker, I think, but it still took over an hour.
+Let me give you some numbers to illustrate just how bad we were. My code took three to four hours to do what it needed to do with the corpus data. Two of the abovementioned classmates had similar running times. The C student had code that ran quicker, I think, but it still took over an hour.
 
 The Vietnamese CS student who was in our module for a free A, however, wrote code that finished executing _within ten seconds_. He ran his code in front of me, which is when I realised that I was thoroughly cooked. It was one of those times where the disparity in skill was so vast that all I could do was laugh.
 
