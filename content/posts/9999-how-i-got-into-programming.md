@@ -15,7 +15,7 @@ _Language and the Computer_ was a peculiar module. It was taught in the linguist
 
 The module was taught in Python and introduced us to working with [text corpora](https://en.wikipedia.org/wiki/Text_corpus). We started with a few weeks of an introduction to Python. Imagine a whirlwind introduction to the language and general programming constructs, followed by a swift transition to the [Natural Language Toolkit (NLTK)](https://www.nltk.org/), to be used alongside those barely-existing programming fundamentals.
 
-Now imagine writing code in Notepad++, running it in [IDLE](https://docs.python.org/3/library/idle.html), not using Git (or even knowing about its existence), being thoroughly confused by loops, and not understanding the big deal about regular expressions even though the module dedicated an entire week to that concept. That was me.
+Now imagine writing code in Notepad++, running it in [IDLE](https://docs.python.org/3/library/idle.html), not using Git (or even knowing about its existence), being thoroughly confused by loops, and not understanding the big deal about regular expressions even though our professor dedicated a whole week to that concept. That was me.
 
 {{< alert "comment" >}}
 All I remember about regular expressions back then is a quote advising the judicious use of regexes, lest one end up with two problems instead of the original one.
