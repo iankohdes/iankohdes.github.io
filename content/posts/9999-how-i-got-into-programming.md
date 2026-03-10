@@ -37,4 +37,4 @@ The Vietnamese CS student who was in our module for a free A, however, wrote cod
 
 Regardless, I passed _Language and the Computer_ with a highly undeserved B. To Nguyen Duc: I don’t know where in the world you are today, but thanks a million for helping me write parts of my code. You didn’t have to as it was your last semester before graduation, but you did so anyway, and that kept me from swearing off programming forever (in addition to helping me pass).
 
-This is how I got started with programming. I’ve got better these days: I now know how to push poorly-written code to a remote Git repository for permanent display and archival. {{< icon "github" >}}
+This is how I got started with programming. I’ve got better since then at least: I now know how to push poorly-written code to a remote Git repository for permanent display and archival. {{< icon "github" >}}
