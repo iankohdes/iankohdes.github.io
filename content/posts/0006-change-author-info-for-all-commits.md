@@ -11,7 +11,7 @@ Sometimes we want to update _all_ of our previous Git commits so that they use a
 
 We can see our previous commits and commit information using `git log`.
 
-Per [this Stack Overflow thread](https://stackoverflow.com/a/2920001), we can enter the following command:
+To update the author information of all of our Git commits, we enter the following command:
 
 ```text
 git filter-branch -f --env-filter \
