@@ -130,7 +130,7 @@ Overriding the default font is super easy: we just reference JetBrains Mono in t
 
 _Now, since JetBrains Mono is also available as a variable-width font, why didn’t I want to use that in my `custom.css` file?_
 
-Gemini explained that the ‘most common HTML elements’ for displaying code are:
+Gemini explained that the “most common HTML elements” for displaying code are:
 
 - `<code>` for inline code snippets
 - `<pre>` for preformatted text such as code blocks

@@ -3,8 +3,6 @@ title: "Change author information for all Git commits"
 date: 2026-03-10
 draft: false
 tags: ["git", "github"]
-series: ["Grokking Git"]
-series_order: 1
 ---
 
 Sometimes we want to update _all_ of our previous Git commits so that they use a specific author name and/or e-mail address. One use case is when previous commits include a mix of e-mail addresses, and one or more of them is _private_.
