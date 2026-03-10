@@ -5,22 +5,20 @@ draft: false
 tags: ["mistakes and learnings", "rust"]
 ---
 
-This is the first in a set of posts tagged under [“mistakes and learnings”](https://iankohdes.github.io/tags/mistakes-and-learnings/). Here I describe mistakes that I – or others – make, with learnings so I might avoid them in future.
+{{<lead>}}
+This is the first in a set of posts tagged under [“mistakes and learnings”](https://iankohdes.github.io/tags/mistakes-and-learnings/), where I describe mistakes that I – or others – make and identify learnings to avoid these errors in future.
+{{</lead>}}
 
-## Introduction
-
-I followed [section 16.5](https://doc.rust-lang.org/rust-by-example/trait/iter.html) of the online book _Rust by Example_, which introduces the [iterator trait](https://doc.rust-lang.org/core/iter/trait.Iterator.html). The section uses the example of the [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence), which we’ve all probably learnt in school. It is an infinite sequence of integers where any given integer is the sum of the two integers immediately before it:
+I followed [section 16.5](https://doc.rust-lang.org/rust-by-example/trait/iter.html) of the online book _Rust by Example_, which introduces the [iterator trait](https://doc.rust-lang.org/core/iter/trait.Iterator.html) (assumed knowledge). The section uses the example of the [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence), which we’ve all probably learnt in school. It is an infinite sequence of integers where any given integer is the sum of the two integers immediately before it:
 
 ```text
 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55
 ```
 
-The Fibonacci sequence can be constructed with the set of natural numbers (excluding zero), but this example includes zero.
+The Fibonacci sequence can be constructed with the set of natural numbers (excluding zero), but this example is initialised with `0` and `1`.
 
 {{< alert "comment" >}}
 Iterators are cool because they enable lazy evaluation and prevent the need to allocate memory for intermediate values. They are akin to a list of instructions that are accumulated and run only when required. Python has [iterators](https://docs.python.org/3/glossary.html#term-iterator) too.
-
-To the reader: I treat iterators as assumed knowledge to keep this post concise.
 {{< /alert >}}
 
 ## Typing along (and introducing a little error)
