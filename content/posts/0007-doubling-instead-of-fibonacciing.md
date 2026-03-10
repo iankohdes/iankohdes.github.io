@@ -113,6 +113,8 @@ After correcting the error, I got the result I expected:
 34
 ```
 
+By adding `self.curr` to `self.next` _after_ `self.curr`’s original value was updated to `self.next`, I essentially added a number to itself (i.e. doubling it), thus the observed erroneous results.
+
 ## Learning
 
 I pondered a little over why I made this silly mistake in the first place. After all, I was copying already-written code and yet was able to make a mistake that caused systematically different results.
