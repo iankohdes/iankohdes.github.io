@@ -1,11 +1,11 @@
----
+<!-- ---
 title: "Analysing the Japanese characters in an anime episode"
 date: 2100-01-01
 draft: false
 tags: ["anime", "term-frequency", "japanese", "subtitles", "psycho-pass"]
 series: ["Anime Subtitle Project"]
 series_order: 1
----
+--- -->
 
 {{< alert "github" >}}
 [Click here](https://github.com/iankohdes/examining-one-anime-episodes-subtitles/tree/main) to access the GitHub repository.

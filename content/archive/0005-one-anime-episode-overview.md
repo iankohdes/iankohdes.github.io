@@ -1,11 +1,11 @@
----
+<!-- ---
 title: "Analysing an anime episode’s subtitles"
 date: 2025-06-18
 draft: false
 tags: ["anime", "term-frequency", "japanese", "subtitles", "psycho-pass"]
 series: ["Exploring and analysing an anime episode’s (Japanese) subtitles"]
 series_order: 1
----
+--- -->
 
 {{< alert "fork" >}}
 **2025-06-30. This article is in the process of being refactored.** Originally, I planned for it to be a series, with each entry representing some step of the analysis process.
