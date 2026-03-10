@@ -6,10 +6,10 @@ tags: ["python", "reflections"]
 ---
 
 {{<lead>}}
-I wrote my first line of code while at university. It wasn’t my favourite thing to do.
+I wrote my first line of code while doing my undergraduate studies. It wasn’t my favourite thing to do.
 {{</lead>}}
 
-It was early 2012 in Singapore, and I found myself enrolled in a computational linguistics module called _Language and the Computer_ while doing my undergraduate studies. We were taught by a stout Australian professor who allowed us to eat during lectures and lab sessions as long as we shared our food with him. (I don’t recall anyone taking him up on that offer, and thus no one ate in class. Effective classroom management, this.)
+It was early 2012 in Singapore, and I found myself enrolled in a computational linguistics module called _Language and the Computer_. We were taught by a stout Australian professor who allowed us to eat during lectures and lab sessions as long as we shared our food with him. (I don’t recall anyone taking him up on that offer, and thus no one ate in class. Effective classroom management, this.)
 
 _Language and the Computer_ was a peculiar module. It was taught in the linguistics department, whose students weren’t normally expected to think algorithmically. Most of us had never even programmed a computer before, with two exceptions: a final-year computer science major who’d enrolled for a free A (understandable, since my university graded on a curve), and a fellow third-year whose dad sent him to C classes when he was a teenager.
 
