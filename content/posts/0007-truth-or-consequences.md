@@ -1,5 +1,5 @@
 ---
-title: "Truth or Consequences"
+title: "Command-Line Rust: Truth or Consequences"
 date: 2999-12-31
 draft: false
 tags: ["rust", "command-line rust"]
