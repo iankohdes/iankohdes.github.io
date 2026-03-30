@@ -8,7 +8,7 @@ series_order: 1
 ---
 
 {{< alert "circle-info" >}}
-This entry, along with the rest of the series, summarises my learnings from Ken Youens-Clark’s _Command-Line Rust_ (2024 updated edition).
+Summary of learnings from chapter 1 of Ken Youens-Clark’s _Command-Line Rust_ (2024 updated edition).
 {{< /alert >}}
 
 We start with the most basic of functions.
