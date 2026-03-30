@@ -57,7 +57,7 @@ Below is an example of a test. It always evaluates to `true` (which makes it a p
 
 We add the `#[test]` attribute before _every_ test function. The `assert!` macro checks that an expression evaluates to `true`. The `assert_eq!` macro (not used here) checks that a return value matches an expected value.
 
-A function may have multiple `assert!` or `assert_eq!` calls in a function. However, as soon as the first call fails, the entire test function fails.
+A test function may have multiple `assert!` or `assert_eq!` calls. However, as soon as the first call fails, the entire test function fails.
 
 ```rust
 fn main() {
