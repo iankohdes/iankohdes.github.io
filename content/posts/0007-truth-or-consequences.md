@@ -51,7 +51,7 @@ Notice that the project name, `clr-01`, matches the argument I gave to the `carg
 
 ## Integration tests
 
-An integration test checks that software components work together. In this case it’s a little contrived, since we only have a single `main` function, but the principle stands.
+An integration test checks that software components work together. In this case it’s a little contrived since we only have a single `main` function, but the principle stands.
 
 Below is an example of a test. It always evaluates to `true` (which makes it a pointless test, but illustrates what a successful test looks like).
 
@@ -204,7 +204,7 @@ An exit value is an integer from `0` to `255` indicating whether a program has s
 1
 ```
 
-Programs that fail often generate an exit code of `1`, but this isn’t always the case. See the below example, where we deliberately misspell the `cd` command.
+Programs that fail often generate an exit code of `1`, but this isn’t always the case. See the below example, where I deliberately misspell the `cd` command.
 
 ```zsh
 > cdd
