@@ -234,6 +234,10 @@ In both cases, the process is terminated in what the documentation refers to as 
 
 For `exit()`, the exit code is passed to the operating system and can then be consumed by another process. This also illustrates the value of program exit codes: they allow us to compose programs together.
 
+{{< alert "circle-info" >}}
+For a clean shutdown, the documentation advises running `exit()` or `abort()` once there are no more destructors left to run. In the case of `exit()`, one could _avoid_ using it altogether by returning a type that implements the `Termination` trait, examples of which include `ExitCode` and `Result`.
+{{< /alert >}}
+
 If we execute two programs in sequence, the second will know to run once it receives an exit code of `0` from the first. If the first generates an exit code of `1`, the second will not run. In the case of multiple programs running consecutively, once one of them fails, all other downstream programs will not run.
 
 ## Writing to `stdout`
