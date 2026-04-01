@@ -193,7 +193,7 @@ The code in this section is just a different way of doing things, compared to th
 
 ## Program exit values
 
-An exit value is an integer from `0` to `255` indicating whether a program has succeeded or failed in its execution. A value of `0` indicates success, while all other values indicate failure. We can verify this in `zsh` using the `true` and `false` commands.
+An exit value is an integer from `0` to `255` indicating whether a program has succeeded or failed in its execution. A value of `0` indicates success, while all other values indicate failure. We can verify this in the terminal using the `true` and `false` commands.
 
 ```zsh
 > true
