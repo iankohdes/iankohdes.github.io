@@ -242,4 +242,69 @@ For a clean shutdown, the documentation advises running `exit()` or `abort()` on
 
 ## Writing to `stdout`
 
-`stdout`, or [standard output](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)), is a “stream to which a program writes its output data”.
+`stdout`, or [standard output](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)), is a “stream to which a program writes its output data”. We will refactor `runs()` to check the result of the `main()` function (which is the string, `"Hello, world!",` that gets printed to the console).
+
+```rust
+use assert_cmd::Command;
+use pretty_assertions::assert_eq;
+
+fn main() {
+    println!("Hello, world!");
+}
+
+#[test]
+fn works() {
+    assert!(true)
+}
+
+#[test]
+fn runs() {
+    let mut cmd = Command::cargo_bin("clr-01").unwrap();
+    let output = cmd.output().expect("failed to get output");
+    assert!(output.status.success());
+
+    let stdout = String::from_utf8(output.stdout).expect("`Output.stdout` should be valid UTF-8");
+    assert_eq!(stdout, "Hello, world!\n");
+}
+```
+
+Now we go through `runs()` line-by-line. Recall that the `assert!` macro checks that an expression evaluates to `true`, while the `assert_eq!` macro checks that an expression, when evaluated, is equivalent to a specific value.
+
+### `assert!` section
+
+`Command::cargo_bin()`
+- Comes from the `assert_cmd` crate and returns `Result<Command, crate::cargo::CargoError>`.
+- Attempts to create an instance of `Command` by identifying the binary executable in the crate (i.e. our current project); our executable, in this case, is `clr-01` and lives in `/target/debug`.
+
+`Command.output()`
+- This is unwrapped from the previous line; if `Command::cargo_bin()` returns an error, then the program panics and `Command.output()` is never run.
+- Argument: `Command`, return value: `Result<Output>`.
+- This method executes the `Command` and collects all of its output, which is basically `stderr` and `stdout`.
+
+`Output.expect()`
+- Since the return value is a `Result`, `Command.output()` can be combined with this method.
+- Returns the unwrapped `Ok` value and panics if it gets an `Err` instead; unlike `.unwrap()`, it will pass on an error message (its argument) together with the contents of `Err`.
+
+`Output.status`
+- An attribute of type `ExitStatus` (which, if I’ve read the docs correctly, is a wrapped `i32`).
+- `ExitStatus` is a program’s exit code, where `0` indicates a successful execution and any other integer a failed one.
+
+`ExitStatus.success()`
+- Returns a `bool` by evaluating the `ExitStatus == 0` expression.
+- Therefore, `assert!(output.status.success())` checks that the command executes successfully verifying that the exit code is `0`.
+
+### `assert_eq!` section
+
+`String::from_utf8()`
+- Argument: a vector of bytes (`Vec<u8>`); return value: `Result<String, FromUtf8Error>`.
+- Makes sure that a byte slice is valid UTF-8.
+- Remember that the return value is owned; a borrowed alternative is `str::from_utf8()`, which returns `&str` as its `Ok` value.
+
+`Output.stdout`
+- This attribute is of type `Vec<u8>`.
+- It is the data that a process writes to `stdout`.
+- `assert_eq!(stdout, "Hello, world!\n")` compares the converted `stdout` (converted into a `String`, that is) with the output of `main()`, which is what’s printed to the console.
+
+{{< alert "comment" >}}
+As an aside, a value of type `String` and another of type `&str` can be compared for equality. I write this because the string literal `"Hello, world!"` (in `main()`) is of type `&str`, while `stdout` (defined in `runs()`) is of type `String`.
+{{< /alert >}}
