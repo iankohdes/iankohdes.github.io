@@ -228,11 +228,11 @@ std::process::abort()
 
 In both cases, the process is terminated in what the documentation refers to as a “platform specific ‘abnormal’ manner”, with the following consequences:
 
-- no destructors on any stack will run (either on the current one or that of any other thread),
+- no [destructors](https://doc.rust-lang.org/reference/destructors.html) on any stack will run (either on the current one or that of any other thread),
 - Rust I/O buffers are not flushed (e.g. `BufWriter`), and
 - C `stdio` buffers are not flushed.
 
-For `exit()`, the exit code is passed to the operating system and can then be consumed by another process. This also illustrates the value of program exit codes: they allow us to compose programs together.
+For `exit()`, the exit code is passed to the operating system and can then be consumed by another process. This also illustrates the value of program exit codes: they allow us to **compose programs** together.
 
 {{< alert "circle-info" >}}
 For a clean shutdown, the documentation advises running `exit()` or `abort()` once there are no more destructors left to run. In the case of `exit()`, one could _avoid_ using it altogether by returning a type that implements the `Termination` trait, examples of which include `ExitCode` and `Result`.
