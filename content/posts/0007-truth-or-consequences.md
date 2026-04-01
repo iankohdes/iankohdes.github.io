@@ -115,7 +115,7 @@ Anytime we execute a command, the operating system first searches in a predefine
 echo $PATH | tr : '\n'
 ```
 
-The `tr` command stands for “translate” and replaces the colon with `"\n"`.
+The `tr` command stands for “translate” and replaces the colon with `\n`.
 
 Let’s illustrate the above explanation with an example. This involves creating another test function called `runs()`, to be added after `works()` (defined above).
 
