@@ -1,5 +1,5 @@
 ---
-title: "Command-Line Rust: Truth or Consequences"
+title: "Truth or consequences"
 date: 2999-12-31
 draft: false
 tags: ["rust", "command-line rust"]
@@ -8,7 +8,7 @@ series_order: 1
 ---
 
 {{< alert "circle-info" >}}
-Summary of learnings from chapter 1 of Ken Youens-Clark’s _Command-Line Rust_ (2024 updated edition).
+Summary of learnings from [chapter 1](https://learning.oreilly.com/library/view/command-line-rust/9781098109424/ch01.html) of Ken Youens-Clark’s _Command-Line Rust_ (2024 updated edition).
 {{< /alert >}}
 
 We start with the most basic of functions.
