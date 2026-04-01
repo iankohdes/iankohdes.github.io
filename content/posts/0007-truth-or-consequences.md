@@ -1,6 +1,6 @@
 ---
 title: "Truth or consequences"
-date: 2999-12-31
+date: 2026-04-02
 draft: false
 tags: ["rust", "command-line rust"]
 series: ["Command-Line Rust"]
