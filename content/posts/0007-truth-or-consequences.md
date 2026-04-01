@@ -193,3 +193,43 @@ The code in this section is just a different way of doing things, compared to th
 
 ## Program exit values
 
+An exit value is an integer from `0` to `255` indicating whether a program has succeeded or failed in its execution. A value of `0` indicates success, while all other values indicate failure. We can verify this in `zsh` using the `true` and `false` commands.
+
+```zsh
+> true
+> echo $?
+0
+> false
+> echo $?
+1
+```
+
+Programs that fail often generate an exit code of `1`, but this isn’t always the case. See the below example, where we deliberately misspell the `cd` command.
+
+```zsh
+> cdd
+zsh: command not found: cdd
+> echo $?
+127
+```
+
+We specify exit codes in Rust like so:
+
+```rust
+std::process::exit(0)
+std::process::exit(1)
+```
+
+In addition to exit codes, we can also abort a program by running this:
+
+```rust
+std::process::abort()
+```
+
+In both cases, the process is terminated in what the documentation refers to as a “platform specific ‘abnormal’ manner”, with the following consequences:
+
+- no destructors on any stack will run (either on the current one or that of any other thread),
+- Rust I/O buffers are not flushed (e.g. `BufWriter`), and
+- C `stdio` buffers are not flushed.
+
+For `exit()`, the exit code is passed to the operating system and can then be consumed by another process.
