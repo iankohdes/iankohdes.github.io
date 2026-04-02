@@ -63,7 +63,7 @@ Compared to actions:
 - Calculations are **highly composable** since a calculation’s output can be used as another calculation’s input.
 - One doesn’t have to worry about the **order** in which things are run. (Think about an action that takes no inputs and instead uses a global variable: the latter must be initialised before the action can be run.)
 
-A calculation’s main drawback -- which is also one shared with actions -- is that **to see what it does, one needs to run it**. For short calculations one might be able to get away with inspecting the source code, but what if a calculation is imported from elsewhere, or is very long and/or complicated? Running said calculation would be the easiast way to see how it works.
+A calculation’s main drawback -- which is also one shared with actions -- is that **to see what it does, one needs to run it**. For short calculations one might be able to get away with inspecting the source code, but what if a calculation is imported from elsewhere, or is very long and/or complicated? Running said calculation would be the easiest way to see how it works.
 
 Here, data have an advantage over calculations. The former do not require running for users to know what they do. Where feasible, it might thus make more sense to use data instead of calculations.
 
