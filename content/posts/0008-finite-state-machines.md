@@ -66,7 +66,7 @@ to do this for us.
 
 1683
 02:14:30,813 --> 02:14:34,566
-He‘s a robot. So you don’t have to
+He’s a robot. So you don’t have to
 ask him to do anything.
 
 1684
@@ -86,7 +86,7 @@ It’s what we intended, Dr. Brand.
 It’s our only chance to save people on Earth.
 ```
 
-If you’ve watched the film before, you’ll probably recall this scene. Notice that each grouping of subtitles starts with an index (unsigned integer), followed by a timing (start and end timestamps to display the subtitle text), and one or more lines of subtitles. Subtitle lines may contain simple HTML mark-up, as in the grouping with the index 1684. The parsing logic could therefore be represented by the following transition table.
+If you’ve watched the film before, you’ll probably recall this scene. Each subtitle grouping starts with an index (unsigned integer), followed by a timing (start and end timestamps to display the subtitle text), and one or more lines of subtitles. Subtitle lines may contain simple HTML mark-up, as in the grouping with the index 1684. The parsing logic could therefore be represented by the following transition table.
 
 | Current state | Input: *digit* | Input: *timestamps* | Input: *text* | Input: *blank line* |
 | ------------- | -------------- | ------------------- | ------------- | ------------------- |
