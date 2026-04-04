@@ -8,7 +8,7 @@ tags: ["finite state machines", "concepts"]
 A [finite state machine (FSM)](https://en.wikipedia.org/wiki/Finite-state_machine) is a behavioural model. It lets us design mechanisms to transition from one state to another. A key constraint is that our system can only be in one state at a time (i.e. states are mutually exclusive). As we’ll soon see, this constraint is an advantage.
 
 {{< alert "comment" >}}
-In software engineering, people often use both terms interchangeably. There is, however, a theoretical different between the two: FSMs have a finite number of states, while state machines have an *infinite* number of states and are therefore more general.
+In software engineering, people often use both terms interchangeably. There is, however, a theoretical difference between the two: FSMs have a finite number of states, while state machines have an *infinite* number of states and are therefore more general.
 {{< /alert >}}
 
 An FSM has three components:
