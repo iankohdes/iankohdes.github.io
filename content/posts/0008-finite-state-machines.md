@@ -30,11 +30,11 @@ graph LR
     e((Snack)) -->|tired| c((Nap))
 {{</mermaid>}}
 
-From the trivial example above we can immediately see the relationships among the different states, along with specific constraints in system logic. For example, we know that it is possible to transition between the *Read* and *Nap* states in both directions. It is not possible, however, to transition from *Snack* back to *Read*; one can only return to the *Read* state through *Nap*. Therefore, the combination of the *Snack* event and *awake* input is illegal.
+From the trivial example above we can immediately see the relationships among the different states, along with specific constraints in system logic. For example, we know that it is possible to transition between the *Read* and *Nap* states in both directions. It is not possible, however, to transition from *Snack* back to *Read*; one can only return to the *Read* state through *Nap*. Therefore, the combination of the *Snack* state and *awake* input is illegal.
 
 This highlights one of the most important (and coolest) aspects of FSM: **they allow us to make illegal states unrepresentable.**
 
-Without an FSM, we would have had to model the above example as a series of if-them statements to get the same result.
+Without an FSM, we would have had to model the above example as a series of if-then statements to get the same result.
 
 ```text
 if state == Read && input == tired then Nap
@@ -56,7 +56,7 @@ But, as our FSM’s graphical representation clearly indicates, this is not poss
 
 When building an FSM, we want to map all allowable combinations of current states and inputs to new states. A tabular representation of this is known as a [state-transition table](https://en.wikipedia.org/wiki/State-transition_table#Two-dimensions), which is like a slightly more enriched version of the graph we saw earlier as it also shows error (illegal) states.
 
-To illustrate this, here’s a more real-world use case for an FSM. Imagine we are parsing a subtitle file. The SRT format is probably the most popular out there, and it contains groupings of subtitles that are separated by single blank lines. Here’s a snippet of the subtitles from the film *Interstellar* (2014):
+To illustrate this, here’s a more real-world use case for an FSM. Imagine we are parsing a subtitle file. The SRT format is probably the most popular out there, and it contains groupings of subtitles that are separated by single blank lines. Here’s a snippet of the subtitles from the 2014 film *Interstellar*:
 
 ```text
 1682
@@ -95,7 +95,7 @@ If you’ve watched the film before, you’ll probably recall this scene. Notice
 | *Timing*      | error          | error               | *Subtitle*    | error               |
 | *Subtitle*    | error          | error               | *Subtitle*    | *Empty*             |
 
-Notice how, in the table’s last row, there are two transitions. The combination of a *Subtitle* state and *blank line* input serves as a reset to the *Empty* state, such that the parser is ready for a new subtitle grouping. The FSM of our subtitle parser thus looks like this:
+Notice how, in the table’s last row, there are two transitions. If a *Subtitle* state receives another line of text, then the state remains unchanged. The combination of a *Subtitle* state and *blank line* input serves as a reset to the *Empty* state, such that the parser is ready for a new subtitle grouping. The FSM of our subtitle parser thus looks like this:
 
 {{<mermaid>}}
 graph LR
