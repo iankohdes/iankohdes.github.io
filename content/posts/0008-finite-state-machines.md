@@ -88,14 +88,16 @@ It’s our only chance to save people on Earth.
 
 If you’ve watched the film before, you’ll probably recall this scene. Each subtitle grouping starts with an index (unsigned integer), followed by a timing (start and end timestamps to display the subtitle text), and one or more lines of subtitles. Subtitle lines may contain simple HTML mark-up, as in the grouping with the index 1684. The parsing logic could therefore be represented by the following transition table.
 
-| Current state | Input: *digit* | Input: *timestamps* | Input: *text* | Input: *blank line* |
-| ------------- | -------------- | ------------------- | ------------- | ------------------- |
-| *Empty*       | *Index*        | error               | error         | error               |
-| *Index*       | error          | *Timing*            | error         | error               |
-| *Timing*      | error          | error               | *Subtitle*    | error               |
-| *Subtitle*    | error          | error               | *Subtitle*    | *Empty*             |
+| Current state | Input: *digit* | Input: *timestamps* | Input: *text* | Input: *blank line* | Input: *no more lines* |
+| ------------- | -------------- | ------------------- | ------------- | ------------------- | ---------------------- |
+| *Empty*       | *Index*        | error               | error         | error               | error                  |
+| *Index*       | error          | *Timing*            | error         | error               | error                  |
+| *Timing*      | error          | error               | *Subtitle*    | error               | error                  |
+| *Subtitle*    | error          | error               | *Subtitle*    | *Empty*             | *End*                  |
 
-Notice how, in the table’s last row, there are two transitions. If a *Subtitle* state receives another line of text, then the state remains unchanged. The combination of a *Subtitle* state and *blank line* input serves as a reset to the *Empty* state, such that the parser is ready for a new subtitle grouping. The FSM of our subtitle parser thus looks like this:
+Notice how, in the table’s last row, there are three transitions. If a *Subtitle* state receives another line of text, then the state remains unchanged. The combination of a *Subtitle* state and *blank line* input serves as a reset to the *Empty* state, such that the parser is ready for a new subtitle grouping. Lastly, when we have *no more lines* as an input for the *Subtitle* state, we exit the program and the file is considered to be fully parsed.
+
+The FSM of our subtitle parser thus looks like this:
 
 {{<mermaid>}}
 graph LR
@@ -105,6 +107,7 @@ graph LR
 	d -->|Text| e((Subtitle))
 	e -->|Text| e
 	e -->|Blank line| b((Empty))
+	e -->|No more lines| f((End))
 {{</mermaid>}}
 
 ## When not to use finite state machines
